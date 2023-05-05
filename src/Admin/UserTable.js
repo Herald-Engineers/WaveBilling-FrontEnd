@@ -236,17 +236,25 @@ function UserTable(){
     //         setLoading(false);
     //     });
     //     };
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredData, setFilteredData] = useState(tableData);
+    const [searchValue, setSearchValue] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
 
-    const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-
-    const filtered = tableData.filter((item) =>
-      item.name.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    setFilteredData(filtered);
+    
+  const handleSearch = () => {
+    if (searchValue !== '') {
+      setIsSearching(true);
+      const filteredData = tableData.filter((row) => row.userId.includes(searchValue));
+      setSearchResults(filteredData);
+    }
   };
+        
+          const handleInputChange = (event) => {
+            setSearchValue(event.target.value);
+          };
+    
+
 
     return(
         
@@ -272,11 +280,13 @@ function UserTable(){
                         </div> */}
                                                     
                                 <div className='myTables meter-table'style={{ width: '1200px', overflowX: 'scroll' }}>
-                            <div style={{position:'fixed',marginLeft:'215px'}}>
-                                <center><h4 >Kulekhani Upatyaka Khanepani Limited <span style={{color:'#0A83F0',fontFamily:'Montserrat',fontStyle:'normal',fontWeight:'700'}}>(Users)</span></h4></center>
-                            </div>  
+                                <div className="mb-3">
+                                    <input type="text" placeholder="Search User ID" value={searchValue} onChange={handleInputChange} />
+                                    <Button onClick={handleSearch}>Search</Button>
+                                </div> 
 
                         <div style={{ width: '2000px', overflowX: 'scroll',marginTop:'80px'}}>
+                       
                             <table className="table table-striped meterReader-table outer-border"> 
                                 <thead>
                                 <tr>
@@ -292,7 +302,32 @@ function UserTable(){
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {tableData.map((row) => (
+                                {isSearching ? (
+                                    searchResults.map((row) => (
+                                        <tr key={row._id}>
+                                            <td>{row.fullName}</td>
+                                            <td>{row.userId?row.userId:'-'}</td>
+                                            <td>{row.meterNo?row.meterNo:'-'}</td>
+                                            <td>{row.contactNum}</td>
+                                            <td>{row.email}</td>
+                                            <td>{row.address}</td>
+                                            <td>{row.paymentStatus ? (row.paymentStatus === true ? 'Paid' : 'Pending') : '-'}</td>
+
+                                            
+                                            <td>{row.meterNo ? <p><img src={Edit} alt="Edit Consumer" onClick={() => {
+                                                setEdit(row._id); setConsumerType4(row.consumerType);
+                                                setShow4(true); }}/> <img src={Delete} alt="Delete Consumer" onClick={() => {
+                                                setDeleteId(row._id); setConsumerType3(row.consumerType);
+                                                setShow(true); }}/></p>: <p><span onClick={() => {setApproveId(row._id); setConsumerType(row.consumerType);
+                                                setShow2(true);
+                                            }} style={{color:'#2F4858',marginRight:'20px'}}>Approve</span> <span  style={{color:'#9F4040', borderBottom:'1px solid #9F4040'}} onClick={() => {
+                                                setDeleteId2(row._id); setConsumerType2(row.consumerType);
+                                                setShow3(true);
+                                            }}>Delete</span></p>}</td> 
+                                        </tr>
+                                    ))
+                                    ) :(
+                                        tableData.map((row) => (
                                         <tr key={row._id}>
                                             <td>{row.fullName}</td>
                                             <td>{row.userId?row.userId:'-'}</td>
@@ -315,7 +350,8 @@ function UserTable(){
                                             }}>Delete</span></p>}</td> 
                                             
                                         </tr>
-                                    ))}
+                                    ))
+                                    )}
                                 </tbody>
                             </table>
                         </div>
