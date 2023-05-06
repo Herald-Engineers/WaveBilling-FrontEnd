@@ -1,16 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from "react";
-import TableData from "./TableData";
 import LoadingSpinner from '../Components/LoadingSpinner';
 import axios from 'axios';
 import '../Admin/MeterReader.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Edit from '../Image/edit.png';
-import Delete from '../Image/delete.png';
-
-
+import  {FiEdit} from "react-icons/fi";    
+import {MdDeleteOutline} from "react-icons/md"; 
 function submitAddReader(fullName, readerId, contactNum, email,editId) {
   axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/admin/edit-reader', {
     fullName: fullName,
@@ -205,11 +202,11 @@ function DynamicTable(){
               <td>{row.contactNum}</td>
               <td>
                 <form onSubmit={handleSubmit}>
-                  <img src={Edit} alt="Edit Meter Reader" className="" onClick={() => {
+                  <FiEdit size={18} className="edit-icon" onClick={() => {
                     setEditId(row._id);
                     setShow(true);
                   }}/>
-                  <img src={Delete} alt="Delete Meter Reader" className="" onClick={() => {
+                  <MdDeleteOutline size={21} alt="Delete Meter Reader" className="delete-icon" onClick={() => {
                     setDeleteId(row._id);
                     setShow2(true);
                   }} />
@@ -225,11 +222,11 @@ function DynamicTable(){
               <td>{row.contactNum}</td>
               <td>
                 <form onSubmit={handleSubmit}>
-                  <img src={Edit} alt="Edit Meter Reader" className="" onClick={() => {
+                  <FiEdit size={18} alt="Edit Meter Reader" className="edit-icon" style={{marginRight:'6px'}} onClick={() => {
                     setEditId(row._id);
                     setShow(true);
                   }}/>
-                  <img src={Delete} alt="Delete Meter Reader" className="" onClick={() => {
+                  <MdDeleteOutline size={21} alt="Delete Meter Reader" className="delete-icon" onClick={() => {
                     setDeleteId(row._id);
                     setShow2(true);
                   }} />

@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import '../Admin/MeterReader.css';
 import {BiAddToQueue} from "react-icons/bi";
-
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -9,6 +8,8 @@ import LoadingSpinner from '../Components/LoadingSpinner';
 import AdminSidebar from '../Admin/AdminSidebar';
 import MainBox from '../Admin/MainBoxes';
 import MeterTable from '../Admin/MeterTable';
+import  {FiEdit} from "react-icons/fi";    
+import {MdDeleteOutline} from "react-icons/md"; 
 import { Link } from 'react-router-dom';
 import Edit from '../Image/edit.png';
 import Delete from '../Image/delete.png';
@@ -276,15 +277,7 @@ function UserTable(){
                             <div style={{marginBottom:'60px',textAlign:'center',marginLeft: '300px'}}>
                                     <center><h4 style={{position:'fixed',marginBottom:'40px'}} >Kulekhani Upatyaka Khanepani Limited <span style={{color:'#0A83F0',fontFamily:'Montserrat',fontStyle:'normal',fontWeight:'700'}}>(Users)</span></h4></center>
                                 </div>  
-                                {/* <div className="" style={{textAlign: 'right',right:'10px',marginBottom:'60px',position:'fixed'}}>
-                                   
-                                </div>  */}
-                                {/* <div style={{float:'right', width: '180px'}}>
-                                    <div style={{position: 'fixed',display:'flex'}}>
-                                    <input type="text" placeholder="Search User ID" value={searchValue} onChange={handleInputChange} onKeyUp={handleSearch} />
-                                    <Button onClick={handleSearch}>Search</Button>
-                                    </div>
-                                </div> */}
+                             
                                 <div style={{position: 'fixed', width: '100%'}}>
                                     <div style={{display: 'flex', justifyContent: 'space-between', maxWidth: '400px', marginLeft: '366px'}}>
                                         <input type="text" placeholder="Search User ID" value={searchValue} onChange={handleInputChange} onKeyUp={handleSearch} style={{flex: 1, marginRight: '10px', padding: '5px',width:'100px',height:'35px'}} />
@@ -321,9 +314,9 @@ function UserTable(){
                                             <td>{row.paymentStatus ? (row.paymentStatus === true ? 'Paid' : 'Pending') : '-'}</td>
 
                                             
-                                            <td>{row.meterNo ? <p><img src={Edit} alt="Edit Consumer" onClick={() => {
+                                            <td>{row.meterNo ? <p><FiEdit size={18} className="edit-icon" onClick={() => {
                                                 setEdit(row._id); setConsumerType4(row.consumerType);
-                                                setShow4(true); }}/> <img src={Delete} alt="Delete Consumer" onClick={() => {
+                                                setShow4(true); }}/> <MdDeleteOutline size={21} alt="Delete Meter Reader" className="delete-icon" onClick={() => {
                                                 setDeleteId(row._id); setConsumerType3(row.consumerType);
                                                 setShow(true); }}/></p>: <p><span onClick={() => {setApproveId(row._id); setConsumerType(row.consumerType);
                                                 setShow2(true);
@@ -342,12 +335,14 @@ function UserTable(){
                                             <td>{row.contactNum}</td>
                                             <td>{row.email}</td>
                                             <td>{row.address}</td>
-                                            <td>{row.paymentStatus ? (row.paymentStatus === true ? 'Paid' : 'Pending') : '-'}</td>
+                                            <td className={row.paymentStatus ? (row.paymentStatus === true ? 'paid' : 'pending') : 'none'}>
+                                              {row.paymentStatus ? (row.paymentStatus === true ? 'Paid' : 'Pending') : '-'}
+                                            </td>
 
                                             
-                                            <td>{row.meterNo ? <p><img src={Edit} alt="Edit Consumer" onClick={() => {
+                                            <td>{row.meterNo ? <p><FiEdit size={18} className="edit-icon" onClick={() => {
                                                 setEdit(row._id); setConsumerType4(row.consumerType);
-                                                setShow4(true); }}/> <img src={Delete} alt="Delete Consumer" onClick={() => {
+                                                setShow4(true); }}/> <MdDeleteOutline size={21} alt="Delete Meter Reader" className="delete-icon" onClick={() => {
                                                 setDeleteId(row._id); setConsumerType3(row.consumerType);
                                                 setShow(true); }}/></p>: <p><span onClick={() => {setApproveId(row._id); setConsumerType(row.consumerType);
                                                 setShow2(true);

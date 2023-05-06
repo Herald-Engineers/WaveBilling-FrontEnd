@@ -170,4 +170,23 @@ input[type=submit],.submitSchedule{
     height: 100%;
     width: 1346px;
 }
-
+.FiEdit:hover {
+    color: rgb(58, 58, 162);
+  }
+.edit-icon:hover{
+    color: rgb(10, 131, 240);
+}
+.delete-icon:hover{
+    color: rgb(240, 10, 10);
+}
+.paid {
+    background-color: green;
+}
+  
+.pending {
+    background-color: yellow;
+}
+  
+.none {
+    background-color: white;
+}
