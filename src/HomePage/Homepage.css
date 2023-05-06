@@ -10,6 +10,7 @@
     width: 1284px;
     display: inline;
     padding-right: 43px;
+    margin-right: 14px;
 }
 
 /* Banner css*/
@@ -49,7 +50,7 @@
 .right-right-nav-Home{
     float: right;
     height: 100%;
-   width: 1328px;
+   width: 100%;
   
 
 }

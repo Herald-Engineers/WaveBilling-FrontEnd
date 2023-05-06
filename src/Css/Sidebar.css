@@ -94,3 +94,6 @@
     position: fixed;
     border-right: 2.5px solid #F5F5F5;
 }
+.hover-me:active{
+  color: yellow;
+}

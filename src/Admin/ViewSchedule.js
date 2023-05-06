@@ -31,16 +31,16 @@ function ViewSChedule(){
                                 </div>
                 </div>
 
-                <div style={{ width: '1099px', marginTop:'40px' , marginLeft: '40px',marginRight: '40px',height:'320px', overflowX: 'scroll'}}>
-                    <table className='table table-striped meterReader-table outer-border'>
+                <div style={{ width: '989px', marginTop:'40px' , marginLeft: '40px',marginRight: '40px',height:'320px', overflowX: 'scroll'}}>
+                    <table className='table table-striped meterReader-table outer-border' style={{width:'1500px',overflowX:'scroll'}}>
                         <thead>
                             <tr>
                                 <th style={{ width: '500px' }}>Name</th>
-                                <th style={{ width: '8  00px' }}>Address1</th>
-                                <th style={{ width: '500px' }}>address2</th>
-                                <th style={{ width: '500px' }}>Address3</th>
-                                <th style={{ width: '500px' }}>Address4</th>
-                                <th style={{ width: '500px' }}>Address5</th>
+                                <th style={{ width: '500px' }}>Address-1</th>
+                                <th style={{ width: '500px' }}>Address-2</th>
+                                <th style={{ width: '500px' }}>Address-3</th>
+                                <th style={{ width: '500px' }}>Address-4</th>
+                                <th style={{ width: '500px' }}>Address-5</th>
                                 <th style={{ width: '500px' }}>Date</th>
                                 <th style={{ width: '500px' }}>Shift</th>
                             </tr>

@@ -44,6 +44,7 @@ function AdminSidebar(){
 
     links.forEach(link => {
       link.addEventListener('click', function() {
+        
         console.log('Clicked!');
         links.forEach(link => link.classList.remove('active'));
         
@@ -65,21 +66,21 @@ function AdminSidebar(){
                 <div style={{backgroundColor: 'transparent',height:'100vh'}}>
                     <Nav className="flex-column ">
                         <Nav.Link as={Link} to='/meterReader' active={activeLink === 'admindashboard'} onClick={() => setActiveLink('admindashboard')} className='sidebar-fonts-dashboard sidebar-link' >
-                            <div className='d-flex dashbaord-image'>
+                            <div className='d-flex dashbaord-image hover-me'>
                                 {/* <img src={DashboardIcon2} alt="Wave Billing System" className="" />  */}
                                 <TbDashboard size={18}/>
                                 <p style={{fontSize: '16px', paddingLeft: '5px',margin: '0px',fontWeight:'600'}} className="myfontcolor">Dashboard</p> 
                             </div>
                         </Nav.Link>
                         <Nav.Link as={Link} to='/userTable' active={activeLink === 'admindashboard'} onClick={() => setActiveLink('admindashboard')} className='sidebar-fonts-user sidebar-link' >
-                            <div className='d-flex'>
+                            <div className='d-flex hover-me'>
                                 {/* <img src={DashboardIcon2} alt="Wave Billing System" className="" />  */}
                                 <FiUser size={18}/>
                                 <p style={{fontSize: '14px', paddingLeft: '5px',margin: '0px',paddingBottom:'15px'}} className="myfontcolor">Users</p> 
                             </div>
                         </Nav.Link>
                         <Nav.Link as={Link} to='/meterReader' active={activeLink === 'meterReader'} onClick={() => setActiveLink('meterReader')} className='sidebar-fonts-meter sidebar-link' >
-                            <div className='d-flex'>
+                            <div className='d-flex hover-me'>
                                 {/* <img src={DashboardIcon2} alt="Wave Billing System" className="" />  */}
                                 <FiUser size={18}/>
                                 <p style={{fontSize: '14px', paddingLeft: '5px',margin: '0px'}} className="myfontcolor">Meter Reader</p> 

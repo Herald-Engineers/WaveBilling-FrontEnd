@@ -17,8 +17,8 @@ function BillHistory() {
                 </div>
 
                 <div className='' id='bill-history-section'>
-                    <p style={ { fontSize: '22px', fontWeight: 'bold' } }>Payment</p>
-                    <div>
+                    <p style={ { fontSize: '22px', fontWeight: 'bold',marginLeft:'210px' } } >Payment</p>
+                    <div className='' style={{marginLeft:'240px'}}>
                         <History />
                     </div>
 

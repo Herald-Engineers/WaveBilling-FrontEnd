@@ -62,7 +62,7 @@ function UserIssue(){
             <div className='' id='UserIssue'>
                 <div className='d-flex'>
                     <div className='changeSection'>
-                        <div>
+                        <div className='my-issue'>
                             
                             <h1>Report An Issue</h1>
                             

@@ -11,7 +11,6 @@ import Edit from '../Image/edit.png';
 import Delete from '../Image/delete.png';
 
 
-let gId;
 function submitAddReader(fullName, readerId, contactNum, email,editId) {
   axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/admin/edit-reader', {
     fullName: fullName,
@@ -163,10 +162,34 @@ function DynamicTable(){
         setLoading(false);
       });
     };
+    const [filteredData, setFilteredData] = useState(tableData);
+    const [searchValue, setSearchValue] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+
+    
+    const handleSearch = () => {
+        if (searchValue === '') {
+          setIsSearching(false);
+        } else {
+          setIsSearching(true);
+          const filteredData = tableData.filter((row) => row.fullName.includes(searchValue));
+          setSearchResults(filteredData);
+        }
+      };
+          const handleInputChange = (event) => {
+            setSearchValue(event.target.value);
+          };
 
 
   return (
     <>
+      <div style={{position: 'fixed', width: '100%'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', maxWidth: '400px', marginLeft: '366px'}}>
+            <input type="text" placeholder="Search Fullname" value={searchValue} onChange={handleInputChange} onKeyUp={handleSearch} style={{flex: 1, marginRight: '10px', padding: '5px',width:'100px',height:'35px'}} />
+            <Button onClick={handleSearch} style={{width:'100px',height:'35px',margin:'8px 0px'}}>Search</Button>
+        </div>
+      </div>
       <table className="table table-striped meterReader-table outer-border">
         <thead>
           <tr>
@@ -177,7 +200,7 @@ function DynamicTable(){
           </tr>
         </thead>
         <tbody>
-          {tableData.map((row) => (
+          {isSearching ? (searchResults.map((row) => (
             <tr key={row._id}>
               <td>{row.fullName}</td>
               <td>{row.email}</td>
@@ -187,11 +210,6 @@ function DynamicTable(){
                   <img src={Edit} alt="Edit Meter Reader" className="" onClick={() => {
                     setEditId(row._id);
                     setShow(true);
-                    // gId = row._id;
-                    // gFullName = row.fullName;
-                    // gReaderId = row.email;
-                    // gContactNum = 
-                    // gEmail = 
                   }}/>
                   <img src={Delete} alt="Delete Meter Reader" className="" onClick={() => {
                     setDeleteId(row._id);
@@ -200,7 +218,28 @@ function DynamicTable(){
                 </form> 
               </td>
             </tr>
-          ))}  {/*Table Data end*/}
+             ))
+          ) :(
+          tableData.map((row) => (
+            <tr key={row._id}>
+              <td>{row.fullName}</td>
+              <td>{row.email}</td>
+              <td>{row.contactNum}</td>
+              <td>
+                <form onSubmit={handleSubmit}>
+                  <img src={Edit} alt="Edit Meter Reader" className="" onClick={() => {
+                    setEditId(row._id);
+                    setShow(true);
+                  }}/>
+                  <img src={Delete} alt="Delete Meter Reader" className="" onClick={() => {
+                    setDeleteId(row._id);
+                    setShow2(true);
+                  }} />
+                </form> 
+              </td>
+            </tr>
+          ))
+          )}  {/*Table Data end*/}
         </tbody>
       </table>
 

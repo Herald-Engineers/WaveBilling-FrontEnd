@@ -242,14 +242,15 @@ function UserTable(){
     const [searchResults, setSearchResults] = useState([]);
 
     
-  const handleSearch = () => {
-    if (searchValue !== '') {
-      setIsSearching(true);
-      const filteredData = tableData.filter((row) => row.userId.includes(searchValue));
-      setSearchResults(filteredData);
-    }
-  };
-        
+    const handleSearch = () => {
+        if (searchValue === '') {
+          setIsSearching(false);
+        } else {
+          setIsSearching(true);
+          const filteredData = tableData.filter((row) => row.userId.includes(searchValue));
+          setSearchResults(filteredData);
+        }
+      };
           const handleInputChange = (event) => {
             setSearchValue(event.target.value);
           };
@@ -270,24 +271,30 @@ function UserTable(){
                             <MainBox />
                         </div>
                         <div className="d-flex ">
-                        {/* <div>
-                            <input type="text" value={searchTerm} onChange={handleInputChange} />
-                            <ul>
-                                {filteredData.map((item) => (
-                                <li key={item._id}>{item.fullName}</li>
-                                ))}
-                            </ul>
-                        </div> */}
-                                                    
-                                <div className='myTables meter-table'style={{ width: '1200px', overflowX: 'scroll' }}>
-                                <div className="mb-3">
-                                    <input type="text" placeholder="Search User ID" value={searchValue} onChange={handleInputChange} />
+                        
+                          <div className='myTables meter-table'style={{ width: '1200px', overflowX: 'scroll' }}>
+                            <div style={{marginBottom:'60px',textAlign:'center',marginLeft: '300px'}}>
+                                    <center><h4 style={{position:'fixed',marginBottom:'40px'}} >Kulekhani Upatyaka Khanepani Limited <span style={{color:'#0A83F0',fontFamily:'Montserrat',fontStyle:'normal',fontWeight:'700'}}>(Users)</span></h4></center>
+                                </div>  
+                                {/* <div className="" style={{textAlign: 'right',right:'10px',marginBottom:'60px',position:'fixed'}}>
+                                   
+                                </div>  */}
+                                {/* <div style={{float:'right', width: '180px'}}>
+                                    <div style={{position: 'fixed',display:'flex'}}>
+                                    <input type="text" placeholder="Search User ID" value={searchValue} onChange={handleInputChange} onKeyUp={handleSearch} />
                                     <Button onClick={handleSearch}>Search</Button>
-                                </div> 
+                                    </div>
+                                </div> */}
+                                <div style={{position: 'fixed', width: '100%'}}>
+                                    <div style={{display: 'flex', justifyContent: 'space-between', maxWidth: '400px', marginLeft: '366px'}}>
+                                        <input type="text" placeholder="Search User ID" value={searchValue} onChange={handleInputChange} onKeyUp={handleSearch} style={{flex: 1, marginRight: '10px', padding: '5px',width:'100px',height:'35px'}} />
+                                        <Button onClick={handleSearch} style={{width:'100px',height:'35px',margin:'8px 0px'}}>Search</Button>
+                                    </div>
+                                </div>
 
-                        <div style={{ width: '2000px', overflowX: 'scroll',marginTop:'80px'}}>
-                       
-                            <table className="table table-striped meterReader-table outer-border"> 
+                        <div style={{marginTop:'144px', marginLeft: '40px',marginRight: '40px',height:'282px', overflowX: 'scroll'}}>
+                        
+                            <table className="table table-striped meterReader-table2 outer-border" style={{width:'2500px',overflowX:'scroll'}}> 
                                 <thead>
                                 <tr>
                                     <th style={{ width: '300px' }}>Name</th>

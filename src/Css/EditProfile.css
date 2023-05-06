@@ -70,7 +70,7 @@ select#PaymentSelection{
 }
 #UserIssue{
     
-    width: 80%;
+    width: 100%;
     border: none;
     margin: 40px;
     padding-bottom: 20px;
@@ -79,9 +79,17 @@ select#PaymentSelection{
    
     
     border-radius: 20px;
-    background-color: rgba(206, 230, 252, 0.1);;
+ 
+    
+}
+.my-issue{
+    padding-top:40px;
+    padding-bottom: 40px;
+    padding-left: 84px;
+    padding-right: 84px;
+    background-color: rgba(0, 63, 123, 0.1);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-      
+    border-radius: 20px;
 }
 .MySubject{
     width:457px;
