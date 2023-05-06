@@ -1,6 +1,29 @@
-.MyName{
-   
-   
+.edit-form-container {
+    margin-top: 60px;
+    border-radius: 20px;
+    background-color: rgba(206, 230, 252, 0.1);;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+.input-group {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.changeSection {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+}
+.password-change-inputs input,
+.details-inputs input {
+    margin: 5px;
+}
+
+.MyName{   
     padding: 12px 15px;
     margin: 8px 0;
     display: inline-block;
@@ -57,16 +80,10 @@ select#PaymentSelection{
     width: 200px;
 }
 #EditProfile{
-    
-    width: 635px;
-    border: none;
-    padding: 40px 40px; 
-    margin: 66px auto;
-    text-align: center;
-    border-radius: 20px;
-    background-color: rgba(206, 230, 252, 0.1);;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-      
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;     
 }
 #UserIssue{
     
@@ -93,9 +110,6 @@ select#PaymentSelection{
 }
 .MySubject{
     width:457px;
-}
-.changeSection{
-    margin-right: 50px;
 }
 .whole-sec{
     height: 100vh;

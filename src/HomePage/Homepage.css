@@ -21,9 +21,8 @@
   }
 
 .containerHome{
-    width: 100%;
-    margin: 0px;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     /* text-align: center; */
   }
 .center{
@@ -48,11 +47,8 @@
    width: 1343px;
 }
 .right-right-nav-Home{
-    float: right;
+    margin-left: 190px;
     height: 100%;
-   width: 100%;
-  
-
 }
 
 .margin-username{
