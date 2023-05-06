@@ -47,7 +47,9 @@ import ScheduleMeterReader from './MeterReaderPage/ScheduleMeterReader';
 import MeterIssue from './MeterReaderPage/MeterIssue';
 import MeterProfile from './MeterReaderPage/MeterProfile';
 import PaymentSuccess from './HomePage/PaymentSuccess';
+import ProfileIndividual from './HomePage/ProfileIndividual';
 function App() {
+
   return (
 
     // allowing users to navigate between different pages or components within the app.
@@ -97,6 +99,7 @@ function App() {
         <Route path="/payNow" element={<PayNow />} />
         <Route path="/confirmPayment" element={<ConfirmPayment />} />
         <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+        <Route path="/profileIndividual" element={<ProfileIndividual />} />
         
       </Routes>
     </BrowserRouter>

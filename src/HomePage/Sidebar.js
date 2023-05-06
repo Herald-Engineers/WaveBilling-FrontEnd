@@ -4,7 +4,7 @@ import MyImage2 from '../Image/logo123.png';
 import { Link } from 'react-router-dom';
 import '../Css/Sidebar.css';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import DashboardIcon from '../Image/PayBill.png';
 import DashboardIcon2 from '../Image/dashboard.png';
 import  { TbDashboard } from "react-icons/tb";
@@ -14,6 +14,7 @@ import {FiUser} from "react-icons/fi";
 import {TbMessageReport} from "react-icons/tb";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
 
 function MyVerticallyCenteredModal(props) {
 
@@ -42,6 +43,7 @@ function MyVerticallyCenteredModal(props) {
 function Sidebar(){
     const [modalShow, setModalShow] = React.useState(false);
     const links = document.querySelectorAll('.sidebar-link');
+    const navigate = useNavigate();
 
     links.forEach(link => {
     link.addEventListener('click', function() {
@@ -57,6 +59,19 @@ function Sidebar(){
     }
     const location = useLocation();
     const [activeLink, setActiveLink] = useState(location.pathname);
+    const [role, setRole] = useState('');
+    const [profileLinkClicked, setProfileLinkClicked] = useState(false);
+
+    useEffect(() => {
+        if (profileLinkClicked) {
+            const role = localStorage.getItem('role');
+            if (role === 'companyConsumer') {
+              navigate('/editProfile');
+            } else {
+              navigate('/profileIndividual');
+            }
+          }
+    }, [profileLinkClicked]);
     return(
         <div className="sidebar">
             <div className='sidebar-section text-center'>
@@ -82,7 +97,7 @@ function Sidebar(){
 
                         
 
-                        <Nav.Link as={Link} to='/editprofile' active={activeLink === 'profile'} onClick={() => setActiveLink('profile')}  className='sidebar-fonts sidebar-link'>
+                        <Nav.Link as={Link}  active={activeLink === 'profile'} onClick={() => {setActiveLink('profile'); setProfileLinkClicked(true);}}  className='sidebar-fonts sidebar-link'>
                     
                             <div className='d-flex'>
                                     <FiUser  size={18} style={{paddingTop:'2px'}}/>

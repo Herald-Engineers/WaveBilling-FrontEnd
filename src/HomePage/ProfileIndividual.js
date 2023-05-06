@@ -8,13 +8,16 @@ import Sidebars from '../HomePage/Sidebar';
 import '../Css/EditProfile.css';
 
 
-function EditProfile(){
+function ProfileIndividual(){
    
     const token = localStorage.getItem('token');
     const [tableData, setTableData] = useState([]);
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [companyName, setCompanyName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [middleName, setMiddleName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [tel2, setTel2] = useState('');
     const [contactNum, setContactNum] = useState('');
     const [email,setEmail] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,8 +26,16 @@ function EditProfile(){
         setCurrentPassword(event.target.value);
 
     }
-    const handleCompanyName = (event) => {
-        setCompanyName(event.target.value);
+    const handleFirstName = (event) => {
+        setFirstName(event.target.value);
+
+    }
+    const handleMiddleName = (event) => {
+        setMiddleName(event.target.value);
+
+    }
+    const handleLastName = (event) => {
+        setLastName(event.target.value);
 
     }
     const handleContact = (event) => {
@@ -33,6 +44,10 @@ function EditProfile(){
     }
     const handleEmail = (event) => {
         setEmail(event.target.value);
+
+    }
+    const handleTel2 = (event) => {
+        setTel2(event.target.value);
 
     }
     
@@ -55,9 +70,11 @@ function EditProfile(){
             return;
         }
         axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/edit-profile-info', {
-          companyName: companyName,
-          contactNum: contactNum,
-          email1: email,
+          firstName: firstName,
+          middleNum: middleName,
+          lastName: lastName,
+          email: email,
+          tel2: tel2,
           currPassword: currentPassword,
           newPassword : newPassword
           }, 
@@ -121,17 +138,20 @@ function EditProfile(){
                             <p>
                                 <p >
 
-                                <b style={textcolor}>Company Name: </b> <br/>
-                                <input type="text" id="" placeholder='eg. sugam123'  className='login-field'  defaultValue={tableData.companyName} onChange={handleCompanyName}/>{'\n'}<br/> 
-                                
+                                <b style={textcolor}>First Name: </b> <br/>
+                                <input type="text" id="" placeholder='eg. sugam123'  className='login-field'  defaultValue={tableData.firstName} onChange={handleFirstName}/>{'\n'}<br/> 
+                                <b style={textcolor}>Middle Name: </b> <br/>
+                                <input type="text" id="" placeholder='eg. sugam123'  className='login-field'  defaultValue={tableData.middleName} onChange={handleMiddleName}/>{'\n'}<br/> 
+                                <b style={textcolor}>Last Name: </b> <br/>
+                                <input type="text" id="" placeholder='eg. sugam123'  className='login-field'  defaultValue={tableData.lastName} onChange={handleLastName}/>{'\n'}<br/> 
                                 <div>
                                     <b style={textcolor}>Phone Number :</b>  {'\n'}<br/>
-                                    <input type="number" id="" placeholder='9880302189'  className='login-field' defaultValue={tableData.contactNum} style={{  marginBottom: '20px' }} onChange={handleContact}/>{'\n'}
+                                    <input type="number" id="" placeholder='9880302189'  className='login-field' defaultValue={tableData.tel2} style={{  marginBottom: '20px' }} onChange={handleContact}/>{'\n'}
                                 </div>
                                 
                                 <div>
                                     <b style={textcolor}>Email :</b>  {'\n'}<br/>
-                                    <input type="email" id="" placeholder='eg. Bishalnaghar -5, Kathmandu'  className='login-field'  defaultValue={tableData.email1}  onChange={handleEmail} style={{  marginBottom: '20px' }}/>{'\n'}  
+                                    <input type="email" id="" placeholder='eg. Bishalnaghar -5, Kathmandu'  className='login-field'  defaultValue={tableData.email}  onChange={handleEmail} style={{  marginBottom: '20px' }}/>{'\n'}  
                                 </div>
                                 </p>
                            
@@ -146,4 +166,4 @@ function EditProfile(){
         </div>
     );
 }
-export default EditProfile;
+export default ProfileIndividual;

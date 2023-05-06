@@ -49,7 +49,9 @@ function Login() {
         loginBtn.disabled = false;
         localStorage.setItem('fullName', res.data.fullName);
         localStorage.setItem('token', res.data.token);
-        const role = res.data.role;
+       
+        const role = res.data.role; 
+        localStorage.setItem('role', res.data.role);
         setServerResponseReceived(true);
         setLoading(false);
         // Depending on the user role, navigate to a different page

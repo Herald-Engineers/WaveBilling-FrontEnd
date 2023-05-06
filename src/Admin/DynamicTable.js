@@ -37,8 +37,6 @@ function validatePhoneNumber(phoneNumber) {
   return true; // Phone number is valid
 }
 
-let gFullName, gReaderId, gContactNum, gEmail;
-
 function DynamicTable(){
   const [editId, setEditId] = useState(null);
   const [show, setShow] = useState(false);
