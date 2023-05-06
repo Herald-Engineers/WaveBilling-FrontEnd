@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {useState} from 'react';
 import '../SignUp/Sign.css';
 import MyLogo from '../Image/logo123.png';
@@ -9,7 +9,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import LoadingSpinner from '../Components/LoadingSpinner';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {MdVerified} from "react-icons/md";
 
 let resMsg;

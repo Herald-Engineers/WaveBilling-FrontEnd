@@ -7,6 +7,7 @@ import Nav from '../NavbarFolders/Navbar';
 import Sidebars from '../HomePage/Sidebar';
 import '../Css/EditProfile.css';
 
+import Button from 'react-bootstrap/Button';
 
 function EditProfile() {
 
@@ -115,7 +116,7 @@ function EditProfile() {
                 setEmail(email1);
                 setTableData(response.data);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log(error.response.data));
     }, []
     );
     return (
@@ -145,48 +146,47 @@ function EditProfile() {
 
                                     <div className='input-group'>
                                         <label>Current Password</label>
-                                        <input type="password" id="" placeholder='Current Password' className='login-field' value={currentPassword} onChange={handleCurrentPasswordChange} />
+                                        <input type="password" id="" placeholder='Current Password' className='login-field' value={currentPassword} onChange={handleCurrentPasswordChange}  style={{marginBottom:'20px'}}/>
                                     </div>
 
                                     <div className='input-group'>
                                         <label>New Password</label>
-                                        <input type="password" id="newPassword" placeholder='New Password' className='login-field' value={newPassword} onChange={handleNewPasswordChange} disabled={!currentPassword} />
+                                        <input type="password" id="newPassword" placeholder='New Password' className='login-field' value={newPassword} onChange={handleNewPasswordChange} disabled={!currentPassword} style={{marginBottom:'20px'}}/>
                                     </div>
 
                                     <div className='input-group'>
                                         <label>Confirm Password</label>
-                                        <input type="password" id="confirmPassword" placeholder='Re-type new password' className='login-field' disabled={!newPassword} onChange={handleConfirmPassword} />
+                                        <input type="password" id="confirmPassword" placeholder='Re-type new password' className='login-field' disabled={!newPassword} onChange={handleConfirmPassword} style={{marginBottom:'20px'}}    />
                                     </div>
 
                                     <p style={{ color: 'red' }}>{passwordError}</p>
                                 </div>
 
-                                <div className='details-inputs'>
-                                    <div className='input-group'>
+                                <div className='details-inputs' style={{textAlign:'left'}}>
+                                    <div >
+                                        <label>Company Name: </label> {'\n'}<br />
+                                        <input type="text" id="" placeholder='Company name' className='login-field' defaultValue={tableData.companyName} onChange={handleCompanyName} style={{marginBottom:'20px'}}/>{'\n'}
                                         
-
-                                        <b style={textcolor}>Company Name: </b> <br />
-                                        <input type="text" id="" placeholder='eg. sugam123' className='login-field' defaultValue={tableData.companyName} onChange={handleCompanyName} />{'\n'}<br />
-
+                                    </div>
                                         <div>
-                                            <b style={textcolor}>Phone Number :</b>  {'\n'}<br />
-                                            <input type="number" id="" placeholder='9880302189' className='login-field' defaultValue={tableData.contactNum} style={{ marginBottom: '20px' }} onChange={handleContact} />{'\n'}
+                                            <label>Phone Number :</label>  {'\n'}<br />
+                                            <input type="number" id="" placeholder='Phone Number' className='login-field' defaultValue={tableData.contactNum} style={{ marginBottom: '20px' }} onChange={handleContact} />{'\n'}
                                             {telError && <div className="error" style={{ color: 'red' }}>{telError}</div>}
                                         </div>
 
                                         <div>
-                                            <b style={textcolor}>Email :</b>  {'\n'}<br />
-                                            <input type="email" id="" placeholder='eg. Bishalnaghar -5, Kathmandu' className='login-field' defaultValue={tableData.email1} onChange={handleEmail} style={{ marginBottom: '20px' }} />{'\n'}
+                                            <label>Email :</label>  {'\n'}<br />
+                                            <input type="email" id="" placeholder='Email' className='login-field' defaultValue={tableData.email1} onChange={handleEmail} style={{ marginBottom: '20px' }} />{'\n'}
                                             {emailError && <div className="error" style={{ color: 'red' }}>{emailError}</div>}
                                         </div>
                                     
 
-                                    <button type='submit' className='btn btn-primary' style={{ marginTop: '8px' }}>Save Changes</button>
+                                    <Button type='submit' className='btn btn-primary' style={{ marginTop: '8px' }}>Save Changes</Button>
                                 </div>
 
                             </div>
 
-</div>
+                       
                         </form>
                     </div >
                    

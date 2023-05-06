@@ -4,7 +4,7 @@ import MyImage2 from '../Image/logo123.png';
 import { Link } from 'react-router-dom';
 import '../Css/Sidebar.css';
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import DashboardIcon from '../Image/PayBill.png';
 import DashboardIcon2 from '../Image/dashboard.png';
 import MyProfile from '../Image/MyProfile.png';
@@ -41,7 +41,15 @@ function MyVerticallyCenteredModal(props) {
 function AdminSidebar(){
     const [modalShow, setModalShow] = React.useState(false);
     const links = document.querySelectorAll('.sidebar-link');
+    const [fullName, setFullName] = useState('');
+    const [role, setRole] = useState('');
 
+    useEffect(() => {
+      const fullNameValue = localStorage.getItem('fullName');
+      const roleValue = localStorage.getItem('role');
+      setFullName(fullNameValue);
+      setRole(roleValue);
+    }, []);
     links.forEach(link => {
       link.addEventListener('click', function() {
         
@@ -119,8 +127,8 @@ function AdminSidebar(){
                     
                             <div className='' style={{bottom:'0',position:'fixed',paddingBottom:'10px',marginBottom:'30px'}}>
                                 <img src={MyProfile} alt="Profile Picture" className="myProfilePic" /> <br/>
-                                <p style={{fontSize: '16px', paddingLeft: '5px',margin: '0px',fontWeight:'600'}} className="myfontcolor">Sugam Paudyal</p>
-                                <p style={{fontSize: '16px', paddingLeft: '5px',margin: '0px',fontWeight:'300'}} className="">npo3cs4s2</p> 
+                                <p style={{fontSize: '16px', paddingLeft: '5px',margin: '0px',fontWeight:'600'}} className="myfontcolor">{fullName}</p>
+                                <p style={{fontSize: '16px', paddingLeft: '5px',margin: '0px',fontWeight:'300'}} className="">{role}</p> 
                             </div>
                         </Nav.Link>
                     </Nav>
