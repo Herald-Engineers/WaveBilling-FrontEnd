@@ -38,10 +38,7 @@ function ProfileIndividual(){
         setLastName(event.target.value);
 
     }
-    const handleContact = (event) => {
-        setContactNum(event.target.value);
-
-    }
+    
     const handleEmail = (event) => {
         setEmail(event.target.value);
 
@@ -146,7 +143,7 @@ function ProfileIndividual(){
                                 <input type="text" id="" placeholder='eg. sugam123'  className='login-field'  defaultValue={tableData.lastName} onChange={handleLastName}/>{'\n'}<br/> 
                                 <div>
                                     <b style={textcolor}>Phone Number :</b>  {'\n'}<br/>
-                                    <input type="number" id="" placeholder='9880302189'  className='login-field' defaultValue={tableData.tel2} style={{  marginBottom: '20px' }} onChange={handleContact}/>{'\n'}
+                                    <input type="number" id="" placeholder='9880302189'  className='login-field' defaultValue={tableData.tel2} style={{  marginBottom: '20px' }} onChange={handleTel2}/>{'\n'}
                                 </div>
                                 
                                 <div>

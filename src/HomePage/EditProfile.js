@@ -19,6 +19,8 @@ function EditProfile() {
     const [email, setEmail] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [telError, setTelError] = useState('');
+    const [emailError, setEmailError] = useState('');
     const handleCurrentPasswordChange = (event) => {
         setCurrentPassword(event.target.value);
 
@@ -28,11 +30,30 @@ function EditProfile() {
 
     }
     const handleContact = (event) => {
-        setContactNum(event.target.value);
+        const contactValue = event.target.value;
+        setContactNum(contactValue);
+        const regex = /^[0-9]+$/; // regex pattern to match only digits
+        if (!regex.test(contactValue)) {
+        setTelError("Please enter numbers only");
+        } else if (contactValue.length !== 10) {
+        setTelError("Phone number must be 10 digits");
+        } else {
+        setTelError("");
+        }
+        
 
     }
+    //regex for email
     const handleEmail = (event) => {
+        const emailValue = event.target.value;
         setEmail(event.target.value);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailValue)) {
+            setEmailError("Please enter a valid email");
+        } else {
+            setEmailError("");
+        }
+
 
     }
 
@@ -137,11 +158,13 @@ function EditProfile() {
                                         <div>
                                             <b style={textcolor}>Phone Number :</b>  {'\n'}<br />
                                             <input type="number" id="" placeholder='9880302189' className='login-field' defaultValue={tableData.contactNum} style={{ marginBottom: '20px' }} onChange={handleContact} />{'\n'}
+                                            {telError && <div className="error" style={{ color: 'red' }}>{telError}</div>}
                                         </div>
 
                                         <div>
                                             <b style={textcolor}>Email :</b>  {'\n'}<br />
                                             <input type="email" id="" placeholder='eg. Bishalnaghar -5, Kathmandu' className='login-field' defaultValue={tableData.email1} onChange={handleEmail} style={{ marginBottom: '20px' }} />{'\n'}
+                                            {emailError && <div className="error" style={{ color: 'red' }}>{emailError}</div>}
                                         </div>
                                     </p>
 

@@ -98,9 +98,13 @@ function User() {
     setWardNo(event.target.value);
   };
   const handleTel1 = (event) => {
-    setTel(event.target.value);
-    if (!validatePhoneNumber(tel1)) {
-      setTelError("Phone number must be 10 digits or less");
+    const tel1Value = event.target.value;
+    setTel2(event.target.value);
+    const regex = /^[0-9]+$/; // regex pattern to match only digits
+    if (!regex.test(tel1Value)) {
+      setTelError("Please enter numbers only");
+    } else if (tel1Value.length !== 10) {
+      setTelError("Phone number must be 10 digits");
     } else {
       setTelError("");
     }
@@ -108,9 +112,13 @@ function User() {
   const [isChecked, setIsChecked] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const handleTel2 = (event) => {
+    const tel2Value = event.target.value;
     setTel2(event.target.value);
-    if (!validatePhoneNumber(tel2)) {
-      setTel2Error("Phone number must be 10 digits or less");
+    const regex = /^[0-9]+$/; // regex pattern to match only digits
+    if (!regex.test(tel2Value)) {
+      setTel2Error("Please enter numbers only");
+    } else if (tel2Value.length !== 10) {
+      setTel2Error("Phone number must be 10 digits");
     } else {
       setTel2Error("");
     }

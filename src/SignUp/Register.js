@@ -88,11 +88,15 @@ function Register(){
     };
     const handleContact = (event) => {
         setContact(event.target.value);
-        if (!validatePhoneNumber(contactNum)) {
-          setTelError("Phone number must be 10 digits or less");
+        const regex = /^[0-9]+$/; // regex pattern to match only digits
+        if (!regex.test(contactNum)) {
+            setTelError("Please enter numbers only");
+        } else if (contactNum.length !== 10) {
+            setTelError("Phone number must be 10 digits or less");
         } else {
-          setTelError("");
+            setTelError("");
         }
+        
       };
    
     const handleSubmit = (event) => {
