@@ -147,7 +147,7 @@ function Schedule(){
 
                                 </div>
                             </div>
-                            <input type="submit" value="submit" id='submitSchedule'/>
+                            <input type="submit" value="Save and Submit" id='submitSchedule'/>
                         </form>
                     
                     </div>

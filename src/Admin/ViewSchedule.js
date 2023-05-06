@@ -31,8 +31,8 @@ function ViewSChedule(){
                                 </div>
                 </div>
 
-                <div style={{ width: '989px', marginTop:'40px' , marginLeft: '40px',marginRight: '40px',height:'320px', overflowX: 'scroll'}}>
-                    <table className='table table-striped meterReader-table outer-border' style={{width:'1500px',overflowX:'scroll'}}>
+                <div style={{ width: '989px', marginTop:'10px' , marginLeft: '40px',marginRight: '40px', height:'320px', overflowX: 'scroll'}}>
+                    <table className='table table-striped meterReader-table outer-border' style={{width:'1500px',height:'325px',overflowX:'scroll'}}>
                         <thead>
                             <tr>
                                 <th style={{ width: '500px' }}>Name</th>

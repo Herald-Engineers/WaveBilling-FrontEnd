@@ -125,7 +125,7 @@ function AdminSidebar(){
 
                         <Nav.Link as={Link} to='/adminProfile' active={activeLink === 'settings'} style={{ flex: 1, bottom:'0', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }} onClick={() => setActiveLink('settings')}  className='sidebar-fonts sidebar-link'>
                     
-                            <div className='' style={{bottom:'0',position:'fixed',paddingBottom:'10px',marginBottom:'30px'}}>
+                            <div className='' style={{bottom:'0',position:'fixed',paddingBottom:'10px',marginBottom:'30px', marginLeft:'19px'}}>
                                 <img src={MyProfile} alt="Profile Picture" className="myProfilePic" /> <br/>
                                 <p style={{fontSize: '16px', paddingLeft: '5px',margin: '0px',fontWeight:'600'}} className="myfontcolor">{fullName}</p>
                                 <p style={{fontSize: '16px', paddingLeft: '5px',margin: '0px',fontWeight:'300'}} className="">{role}</p> 

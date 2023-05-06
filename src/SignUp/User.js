@@ -58,7 +58,7 @@ function User() {
 
   const [tole, setTole] = useState("");
   const [wardNo, setWardNo] = useState("");
-  const [tel1, setTel] = useState("");
+  const [tel1, setTel1] = useState("");
   const [tel2, setTel2] = useState("");
   const [email, setEmail] = useState("");
   const [issueDate, setIssueDate] = useState("");
@@ -99,7 +99,7 @@ function User() {
   };
   const handleTel1 = (event) => {
     const tel1Value = event.target.value;
-    setTel2(event.target.value);
+    setTel1(event.target.value);
     const regex = /^[0-9]+$/; // regex pattern to match only digits
     if (!regex.test(tel1Value)) {
       setTelError("Please enter numbers only");
@@ -311,12 +311,12 @@ function User() {
                 <label >Contact No:</label><br />
                 <div className="d-flex">
                   <div>
-                    <input type="tel" id="telephone" name="tel1" placeholder="Telephone No" value={tel1} onChange={handleTel1} /><br />
+                    <input type="number" id="telephone" name="tel1" placeholder="Telephone No" value={tel1} onChange={handleTel1} /><br />
                     {tel1Error && <div className="error" style={{ color: 'red' }}>{tel1Error}</div>}
                   </div>
 
                   <div>
-                    <input type="tel" id="telephone2" name="tel2" placeholder="Mobile No" value={tel2} onChange={handleTel2} /><br />
+                    <input type="number" id="telephone2" name="tel2" placeholder="Mobile No" value={tel2} onChange={handleTel2} /><br />
                     {tel2Error && <div className="error" style={{ color: 'red' }}>{tel2Error}</div>}
                   </div>
                 </div>

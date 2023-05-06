@@ -179,11 +179,11 @@ input[type=submit],.submitSchedule{
 .delete-icon:hover{
     color: rgb(240, 10, 10);
 }
-.paid {
-    background-color: green;
+.Paid {
+    color: green;
 }
   
-.pending {
+.Pending {
     background-color: yellow;
 }
   
