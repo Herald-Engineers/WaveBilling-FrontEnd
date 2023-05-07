@@ -80,63 +80,6 @@ function validatePhoneNumber(phoneNumber) {
 //   })
 //   .catch(error => console.log(error));
 // };
-function submitAddReader(firstname, middlename, lastname, houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType,id) {
-  let url = 'https://wavebilling-backend-sabinlohani.onrender.com/edit-user';
-  let data;
-  if (consumerType === 'Individual') {
-    data = {
-      userType: 'Individual',
-      firstName: firstname,
-      lastName: lastname,
-      middleName: middlename,
-      houseNo: houseNo,
-      province: province,
-      municipality: municipality,
-      wardNo: wardNo,
-      tole: tole,
-      tel1: tel1,
-      tel2: tel2,
-      email: email,
-    };
-  } else if (consumerType === 'Company') {
-    data = {
-      consumerType: 'Company',
-      companyName: companyName,
-      address: address,
-      email: email2,
-      contactNum: contactNum,
-    };
-  }
-  axios.patch(url, data, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    }
-  })
-  .then(response => {
-    console.log('successful');
-    console.log(response);
-  })
-  .catch(error => console.log(error.response.data));
-};
-
-function submitAddReader2(companyName, address, email, contactNum, consumerType,id) {
-  axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/admin/edit-reader', {
-    fullName: fullName,
-    readerId: readerId,
-    contactNum: contactNum,
-    email: email,
-    _id: editId,
-   
-    }, 
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }).then(response => { 
-      console.log("successful");  
-      console.log(response);
-    }).catch(error => console.log(error));
-};
 
 function handleApprove(approveId,consumerType) {
     const token = localStorage.getItem('token');
@@ -175,21 +118,24 @@ function UserTable(){
   const handleClose4 = () => setShow4(false);
   const handleClose5 = () => setShow5(false);
   const handleClose6 = () => setShow5(false);
+
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [tel2, setTel2] = useState("");
-  const [email, setEmail] = useState("");
   const [houseNo, setHouseNo] = useState("");
   const [province, setProvince] = useState("");
   const [municipality, setMunicipality] = useState("");
   const [wardNo, setWardNo] = useState("");
   const [tole, setTole] = useState("");
   const [tel1, setTel1] = useState("");
+  const [tel2, setTel2] = useState("");
+  const [email, setEmail] = useState("");
+
   const [companyName, setCompanyName] = useState("");
   const [address, setAddress] = useState("");
   const [contactNum, setContactNum] = useState("");
   const [email2, setEmail2] = useState("");
+  
   const handleCompanyName = (event) => {
     setCompanyName(event.target.value);
   };
@@ -356,23 +302,38 @@ function UserTable(){
     }
   const handleSubmit = (event) => {
     event.preventDefault();
+    const id = editId;
+    const userType = consumerType4;
+    let data;
+
+    if(userType == 'Individual') {
+      data = {
+        id,
+        userType,
+        firstName,
+        middleName,
+        lastName,
+        houseNo,
+        province,
+        municipality,
+        wardNo,
+        tole,
+        tel1,
+        tel2,
+        email
+      }
+    } else {
+      data = {
+        id,
+        userType,
+        companyName,
+        address,
+        email1: email2,
+        contactNum
+      }
+    }
     setLoading(true);
-    axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/edit-user', {
-      userType: 'Individual',
-      firstName: firstName,
-      lastName: lastName,
-      middleName: middleName,
-      houseNo: houseNo,
-      province: province,
-      municipality: municipality,
-      wardNo: wardNo,
-      tole: tole,
-      tel1: tel1,
-      tel2: tel2,
-      email: email,
-    _id: editId
-    
-    }, 
+    axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/edit-user', data, 
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -493,7 +454,8 @@ function UserTable(){
                                     
                                     <td>{row.meterNo ? <p><FiEdit size={18} className="edit-icon" onClick={() => {
                                         setEdit(row._id); setConsumerType4(row.consumerType);
-                                        setShow4(true); }}/> <MdDeleteOutline size={21} alt="Delete Meter Reader" className="delete-icon" onClick={() => {
+                                        setShow4(true); }}/> 
+                                        <MdDeleteOutline size={21} alt="Delete Meter Reader" className="delete-icon" onClick={() => {
                                         setDeleteId(row._id); setConsumerType3(row.consumerType);
                                         setShow(true); }}/></p>: <p><span onClick={() => {setApproveId(row._id); setConsumerType(row.consumerType);
                                         setShow2(true);
@@ -566,7 +528,7 @@ function UserTable(){
     
       <div className='meter-Table'>
         {consumerType4 == "Individual" ?
-        <form  onSubmit={(event) => handleSubmit( event)}>
+        <form  onSubmit={(event) => handleSubmit(event)}>
         <table>
           <tbody>
             <tr>
@@ -664,14 +626,11 @@ function UserTable(){
           </tbody>
         </table>
         <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
-      <Button className='meterButtons2' type='submit' value="submit"  onClick={() => {
+      <Button className='meterButtons2' type='submit' value="submit">  Submit</Button>
+        </form>
+        :
         
-        submitAddReader(firstName, middleName, lastName,houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType4,editId);
-         
-        
-      }}>  Submit</Button>
-        </form>      :
-        <form  onSubmit={(event) => handleSubmit2( event)}>
+        <form  onSubmit={(event) => handleSubmit(event)}>
         <table>
         <tbody>
           <tr>
@@ -704,12 +663,7 @@ function UserTable(){
           </tr>
         </tbody>
       </table> <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
-      <Button className='meterButtons2' type='submit' value="submit"  onClick={() => {
-        
-        submitAddReader(companyName,address, contactNum,email2,editId);
-         
-        
-      }}>  Submit</Button></form>
+      <Button className='meterButtons2' type='submit' value="submit">  Submit</Button></form>
 
       }
      
