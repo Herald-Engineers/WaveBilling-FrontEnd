@@ -244,8 +244,9 @@ function DynamicTable(){
           <div className='justify-content-center main-box2  '>
             <Button className='meterButtons2' type='submit' value="submit"  onClick={() => handleDelete(deleteId)}>Delete</Button><br/><br/>
             <Button onClick={handleClose2} className='meterButtons'>Go Back</Button><br/>
-            {loading && !serverResponseReceived && <LoadingSpinner />}
-          </div>
+           
+          </div> 
+          <div className='text-center'>{loading && !serverResponseReceived && <LoadingSpinner />}</div>
         </Modal.Body>
       </Modal>
     

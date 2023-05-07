@@ -8,7 +8,8 @@ import LoadingSpinner from '../Components/LoadingSpinner';
 import AdminSidebar from '../Admin/AdminSidebar';
 import MainBox from '../Admin/MainBoxes';
 import MeterTable from '../Admin/MeterTable';
-
+import { MdVerified } from "react-icons/md";
+import { Link } from 'react-router-dom';
 function validatePhoneNumber(phoneNumber) {
     if (phoneNumber.length > 10) {
       return false; // Phone number is too long
@@ -16,7 +17,43 @@ function validatePhoneNumber(phoneNumber) {
     return true; // Phone number is valid
 }
 
+
+function MyVerticallyCenteredModal1(props) {
+
+    return (
+        <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered  >
+            <Modal.Body style={{ padding: '68px', backgroundColor: '#D9D9D9' }}>
+                <center>
+                    <MdVerified size={40} style={{ color: 'green' }} /><br />
+                    <span style={{ color: '#32325D', fontSize: '30px', fontWeight: '700' }}>The data you’ve entered has <br/>been submitted successfully.</span>
+                </center>
+                <div className='main-box text-center'>
+                    <Link to='/dataEntry'><Button onClick={props.onHide} className='i-understand'>Continue</Button></Link>
+                </div>
+            </Modal.Body>
+    
+        </Modal>
+    );
+}
+
 function MyVerticallyCenteredModal(props) {
+    function MyVerticallyCenteredModal1(props) {
+
+        return (
+            <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered  >
+                <Modal.Body style={{ padding: '68px', backgroundColor: '#D9D9D9' }}>
+                    <center>
+                        <MdVerified size={40} style={{ color: 'green' }} /><br />
+                        <span style={{ color: '#32325D', fontSize: '30px', fontWeight: '700' }}>The data you’ve entered has <br/>been submitted successfully.</span>
+                    </center>
+                    <div className='main-box text-center'>
+                        <Link to='/meterReader'><Button onClick={props.onHide} className='i-understand'>Continue</Button></Link>
+                    </div>
+                </Modal.Body>
+        
+            </Modal>
+        );
+    }
     // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJyYW1lc2giLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWQiOiI2NDFhZmQ1ODJiMzYxZDI3ODY2NzRmNjEiLCJpYXQiOjE2ODAwOTI2NjB9.1-rmZNz7uaa_AH6wil2n6L-eRCA5EvXKbhDn9XHYSJU';
     // Set the token in local storage
     // localStorage.setItem('token', token);
@@ -34,12 +71,14 @@ function MyVerticallyCenteredModal(props) {
     const [fullnameError, setFullNameError] = useState("");
     const [isChecked, setIsChecked] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
+    const [modalShow2, setModalShow2] = React.useState(false);
     // Retrieve the token from localStorage
     // const token = localStorage.getItem('token');
     const handleFullName = (event) => {
-        setFullname(event.target.value);
+        const FullNameValue = event.target.value;
+        setFullname(FullNameValue);
         const regex = /^[a-zA-Z]+(?: [a-zA-Z]+){0,2}$/;
-        if (!regex.test(fullName)) {
+        if (!regex.test(FullNameValue)) {
             setFullNameError("Please enter a valid name");
         }
         else{
@@ -67,11 +106,14 @@ function MyVerticallyCenteredModal(props) {
         }
     };
     const handleContact = (event) => {
-        setContact(event.target.value);
-        if (!validatePhoneNumber(contactNum)) {
-          setTelError("Phone number must be 10 digits or less");
-        } 
-        else {
+        const phoneNumber = event.target.value;
+        setContact(phoneNumber);
+        const regex = /^[0-9]+$/; // regex pattern to match only digits
+        if (!regex.test(phoneNumber)) {
+          setTelError("Please enter numbers only");
+        } else if (phoneNumber.length !== 10) {
+          setTelError("Phone number must be 10 digits");
+        } else {
           setTelError("");
         }
     };
@@ -82,8 +124,7 @@ function MyVerticallyCenteredModal(props) {
     const [loading, setLoading] = useState(false);
     const handleSubmit = (event) => {
         event.preventDefault();
-        setLoading(true);
-        
+       
             console.log("on process");
             axios.post('https://wavebilling-backend-sabinlohani.onrender.com/admin/add-reader',  {
                 fullName:fullName,
@@ -109,7 +150,7 @@ function MyVerticallyCenteredModal(props) {
                 setLoading(false);
                 
             })
-            .catch(error => console.log(error));
+            .catch(error => console.log(error.response.data));
         
     };
     return (
@@ -131,14 +172,13 @@ function MyVerticallyCenteredModal(props) {
                    
                         <table >
                             <tbody>
-
-                            
                             <tr>
                                 <td>
                                     <label>Full Name:</label> 
                                 </td>
                                 <td>
                                     <input type="text" id="editFirstName" placeholder='Full Name'   value={fullName} onChange={handleFullName} required className='login-field'/>{'\n'}<br/>
+                                    {fullnameError && <div className="error" style={{ color: 'red' }}>{fullnameError}</div>}
                                 </td>
                             </tr>
                             <tr>    
@@ -177,19 +217,24 @@ function MyVerticallyCenteredModal(props) {
                             </tbody>
                         </table>
                     
-                    {loading && !serverResponseReceived && <LoadingSpinner />}
-                    
+                   
                 </div>
                
                
                 <Button onClick={props.onHide} className='meterButtons'>Go Back</Button>
-                <Button onClick={props.onHide}   type='submit'  className='meterButtons2' value="submit"  >Submit</Button>
+                <Button onClick={() => setModalShow2(true)}  type='submit'  className='meterButtons2' value="submit"  >Submit</Button>
                 {/* <input onClick={props.onHide}   className='meterButtons2' /> */}
-                </form>
+                </form>{loading && !serverResponseReceived && <LoadingSpinner />}
+                                {serverResponseReceived ? (
+                                    <MyVerticallyCenteredModal1 show={modalShow2} onHide={() => setModalShow2(false)} />
+                                ) : null}
             </div>
         </Modal.Body>
        
       </Modal>
+
+
+
     
     );
 }

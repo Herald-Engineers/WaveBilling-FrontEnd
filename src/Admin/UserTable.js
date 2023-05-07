@@ -158,10 +158,10 @@ function UserTable(){
     setHouseNo(event.target.value);
   };
   const handleProvince = (event) => {
-    setProvince(event.target.value);
+    setProvince(event.target.province.value);
   };
   const handleMunicipality = (event) => {
-    setMunicipality(event.target.value);
+    setMunicipality(event.target.municipality.value);
   };
   const handleWard = (event) => {
     setWardNo(event.target.value);
@@ -479,31 +479,40 @@ function UserTable(){
           <tbody>
             <tr>
               <td>First Name: </td>
-              <td><input type="text" name="firstName" placeholder="Enter full name"  defaultValue={firstName}  className='meter-Table2' onChange={handleFirstName} required/></td>
+              <td><input type="text" name="firstName" placeholder="Enter full name"   className='meter-Table2' onChange={handleFirstName} required/></td>
             </tr>
             {/* <tr>
               <td>{fullnameError && <div className="error" style={{ color: 'red' }}>{fullnameError}</div>}</td>
             </tr> */}
             <tr>
               <td>Middle Name: </td>
-              <td><input type="text" name="middleName" placeholder="Enter middle name"  value={middleName} onChange={handleMiddleName} required/></td>
+              <td><input type="text" name="middleName" placeholder="Enter middle name"   onChange={handleMiddleName} required/></td>
             </tr>
             <tr>
               <td>Last Name: </td>
-              <td><input type="text" name="lastName" placeholder="Enter last name"  value={lastName} onChange={handleLastName} required/></td>
+              <td><input type="text" name="lastName" placeholder="Enter last name"  onChange={handleLastName} required/></td>
             </tr>
             
             <tr>
               <td>House No: </td>
-              <td><input type="number" name="lastName" placeholder="Enter last name"  value={lastName} onChange={handleLastName} required/></td>
+              <td><input type="number" name="houseNo" placeholder="Enter House No"   onChange={handleHouseNo} required/></td>
             </tr>
             <tr>
               <td>Province: </td>
-              <td><input type="text" name="lastName" placeholder="Enter last name"  value={lastName} onChange={handleLastName} required/></td>
+              <td> <select id="province" name="addressProvince" className="select_option" onChange={handleProvince} >
+                      <option value="" >Province</option>
+                      <option value="Koshi Province">Koshi Province</option>
+                      <option value="Madhesh Province">Madhesh Province</option>
+                      <option value="Bagmati Province">Bagmati Province</option>
+                      <option value="Gandaki Province">Gandaki Province</option>
+                      <option value="Province 5">Lumbini Province </option>
+                      <option value="Karnali Province">Karnali Province</option>
+                      <option value="Sudurpashchim Province">Sudurpashchim Province</option>
+                    </select></td>
             </tr>
             <tr>
               <td>Municipality: </td>
-              <td><input type="text" name="lastName" placeholder="Enter last name"  required/></td>
+             
               <select id="Municipalities" name="municipality" className="select_option"  onChange={handleMunicipality}>
                       <option value="">Municiplaity</option>
                       <option value="Kathmandu">    Kathmandu Metropolitan City  </option>
@@ -531,22 +540,22 @@ function UserTable(){
             </tr>
             <tr>
               <td>Ward no:</td>
-              <td><input type="number" name="tel2" placeholder="Enter Contact No"  value={tel2} onChange={handleTel2} required/></td>
+              <td><input type="number" name="wardNo" placeholder="Enter Contact No"   onChange={handleWard} required/></td>
               
             </tr>
             <tr>
               <td>Tole:</td>
-              <td><input type="text" name="tel2" placeholder="Enter Contact No"  value={tel2} onChange={handleTel2} required/></td>
+              <td><input type="text" name="tole" placeholder="Enter tole No"   onChange={handleTole} required/></td>
               
             </tr>
             <tr>
               <td>Tel 1:</td>
-              <td><input type="number" name="tel2" placeholder="Enter Contact No"  value={tel2} onChange={handleTel2} required/></td>
+              <td><input type="number" name="tel1" placeholder="Enter tel1 No"   onChange={handleTel1} required/></td>
               
             </tr>
             <tr>
               <td>Tel 2:</td>
-              <td><input type="number" name="tel2" placeholder="Enter Contact No"  value={tel2} onChange={handleTel2} required/></td>
+              <td><input type="number" name="tel2" placeholder="Enter tel2 No"   onChange={handleTel2} required/></td>
               
             </tr>
             <tr>
@@ -600,7 +609,7 @@ function UserTable(){
       <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
       <Button className='meterButtons2' type='submit' value="submit"  onClick={() => {
         
-          submitAddReader(firstName, middleName, lastName,houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType4,companyName,address, contactNum,email2,editId);
+        submitAddReader(firstName, middleName, lastName,houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType4,companyName,address, contactNum,email2,editId);
          
         
       }}>  Submit</Button>

@@ -28,7 +28,7 @@ function MyVerticallyCenteredModal(props) {
   
       </Modal>
     );
-  }
+}
 function DataEntry(){
 
     const token = localStorage.getItem('token');
