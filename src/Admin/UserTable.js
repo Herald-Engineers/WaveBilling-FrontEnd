@@ -1057,11 +1057,7 @@ function UserTable(){
         contactNum
       }
     }
-    console.log(userType);
-    console.log(companyName);
     setLoading(true);
-    console.log("Data is: ",data);
-      
     axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/admin/edit-user', data, 
     {
       headers: {
