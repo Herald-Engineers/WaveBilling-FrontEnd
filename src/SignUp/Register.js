@@ -51,7 +51,7 @@ function Register(){
     const color_style ={
             color: '#525252',
     };
-    
+    const [companyName, setCompanyName] = useState("");
     const [accountNo, setAccountNo] = useState("");
     const [contactNum, setContact] = useState("");
     const [bankName, setBank] = useState("");
@@ -64,9 +64,20 @@ function Register(){
     const [loading, setLoading] = useState(false);
     const [tel1Error, setTelError] = useState("");
     const [data, setData] = useState(null);
+    const [fullnameError, setFullNameError] = useState("");
     
     const [modalShow, setModalShow] = React.useState(false);
-  
+    const handleCompanyName = (event) => {
+        const companyNameValue = event.target.value;
+        setCompanyName(companyNameValue);
+        const regex = /^[a-zA-Z]+(?: [a-zA-Z]+){0,2}$/;
+        if (!regex.test(companyNameValue)) {
+          setFullNameError("Please enter a valid name");
+        }
+        else{
+          setFullNameError("");
+        }
+    };
    
     const handleWaterUsage = (event) => {
         setWaterUsage(event.target.value);
@@ -110,7 +121,7 @@ function Register(){
             // handle form submission
         
             const data = {
-                companyName: event.target.companyName.value,
+                companyName: companyName,
                 address: event.target.address.value,
                 email1: event.target.email1.value,
                 contactNum: contactNum,
@@ -179,7 +190,8 @@ function Register(){
                                         <label>Company Name:</label>
                                     </td>
                                     <td>
-                                        <input type="text" name = "companyName"id="inputField" placeholder='Company Name'  required className='login-field'/><br />       
+                                        <input type="text" name = "companyName"id="inputField" placeholder='Company Name'  required className='login-field' onChange={handleCompanyName}/><br />
+                                        {fullnameError && <div className="error" style={{ color: 'red' }}>{fullnameError}</div>}       
                                     </td>
                                 </tr>
                                 <tr>

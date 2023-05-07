@@ -65,9 +65,10 @@ function DynamicTable(){
   };
   
   const handleFullName = (event) => {
-      setFullname(event.target.value);
+    const FullNameValue = event.target.value;
+      setFullname(FullNameValue);
       const regex = /^[a-zA-Z]+(?: [a-zA-Z]+){0,2}$/;
-      if (!regex.test(fullName)) {
+      if (!regex.test(FullNameValue)) {
         setFullNameError("Please enter a valid name");
       }
       else{

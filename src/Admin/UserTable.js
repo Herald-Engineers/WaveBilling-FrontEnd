@@ -19,54 +19,92 @@ function validatePhoneNumber(phoneNumber) {
     }
     return true; // Phone number is valid
   }
-function submitAddReader(firstname, middlename, lastname, houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType,companyName,address,contactNum,email2,id) {
-  let data={
-    firstName: firstname,
-    lastName: lastname,
-    middleName: middlename,
-    houseNo: houseNo,
-    province: province,
-    municipality: municipality,
-    wardNo: wardNo,
-    tole: tole,
-    tel1: tel1,
-    tel2: tel2,
-    email: email,
-    companyName: companyName,
-    address: address,
-    contactNum: contactNum,
-    email2: email2,
-    _id: id,
-  }
+// function submitAddReader(firstname, middlename, lastname, houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType,companyName,address,contactNum,email2,id) {
+//   let data={
+//     firstName: firstname,
+//     lastName: lastname,
+//     middleName: middlename,
+//     houseNo: houseNo,
+//     province: province,
+//     municipality: municipality,
+//     wardNo: wardNo,
+//     tole: tole,
+//     tel1: tel1,
+//     tel2: tel2,
+//     email: email,
+//     companyName: companyName,
+//     address: address,
+//     contactNum: contactNum,
+//     email2: email2,
+//     _id: id,
+//   }
+//   let url = 'https://wavebilling-backend-sabinlohani.onrender.com/edit-user';
+//   if (consumerType === 'Individual') {
+//     data = {
+//       ...data,
+//       consumerType: 'Individual',
+//         firstName: firstname,
+//         lastName: lastname,
+//         middleName: middlename,
+//         houseNo: houseNo,
+//         province: province,
+//         municipality: municipality,
+//         wardNo: wardNo,
+//         tole: tole,
+//         tel1: tel1,
+//         tel2: tel2,
+//         email: email,
+//         _id: id,
+      
+//     };
+//   } else if (consumerType === 'Company') {
+//     data = {
+//       ...data,
+//       consumerType: 'Company',
+//         companyName: companyName,
+//         address: address,
+//         contactNum: contactNum,
+//         email: email2,
+//         _id: id,
+      
+//     };
+//   }
+//   axios.patch(url, data, {
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem('token')}`
+//     }
+//   })
+//   .then(response => {
+//     console.log('successful');
+//     console.log(response);
+//   })
+//   .catch(error => console.log(error));
+// };
+function submitAddReader(firstname, middlename, lastname, houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType,id) {
   let url = 'https://wavebilling-backend-sabinlohani.onrender.com/edit-user';
+  let data;
   if (consumerType === 'Individual') {
     data = {
-      ...data,
-      consumerType: 'Individual',
-        firstName: firstname,
-        lastName: lastname,
-        middleName: middlename,
-        houseNo: houseNo,
-        province: province,
-        municipality: municipality,
-        wardNo: wardNo,
-        tole: tole,
-        tel1: tel1,
-        tel2: tel2,
-        email: email,
-        _id: id,
-      
+      userType: 'Individual',
+      firstName: firstname,
+      lastName: lastname,
+      middleName: middlename,
+      houseNo: houseNo,
+      province: province,
+      municipality: municipality,
+      wardNo: wardNo,
+      tole: tole,
+      tel1: tel1,
+      tel2: tel2,
+      email: email,
     };
   } else if (consumerType === 'Company') {
     data = {
-      ...data,
       consumerType: 'Company',
-        companyName: companyName,
-        address: address,
-        contactNum: contactNum,
-        email: email2,
-        _id: id,
-      
+      companyName: companyName,
+      address: address,
+      email: email2,
+      contactNum: contactNum,
     };
   }
   axios.patch(url, data, {
@@ -78,7 +116,26 @@ function submitAddReader(firstname, middlename, lastname, houseNo, province, mun
     console.log('successful');
     console.log(response);
   })
-  .catch(error => console.log(error));
+  .catch(error => console.log(error.response.data));
+};
+
+function submitAddReader2(companyName, address, email, contactNum, consumerType,id) {
+  axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/admin/edit-reader', {
+    fullName: fullName,
+    readerId: readerId,
+    contactNum: contactNum,
+    email: email,
+    _id: editId,
+   
+    }, 
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    }).then(response => { 
+      console.log("successful");  
+      console.log(response);
+    }).catch(error => console.log(error));
 };
 
 function handleApprove(approveId,consumerType) {
@@ -269,16 +326,16 @@ function UserTable(){
       
     }).catch(error => console.log(error.response.data));
   };
-  const handleSubmit = (event) => {
+  const handleSubmit2 = (event) => {
     event.preventDefault();
     setLoading(true);
-    axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/admin/edit-reader', {
-    firstName: firstName,
-    middleName: middleName,
-    lastName: lastName,
-    tel2: tel2,
-    email: email,
-    _id: editId,
+    axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/edit-user', {
+      consumerType: 'Company',
+      companyName: companyName,
+      address: address,
+      email: email2,
+      contactNum: contactNum,
+      _id: editId,
     
     }, 
     {
@@ -288,16 +345,50 @@ function UserTable(){
     }).then(response => { 
         console.log("successful in edit profile of user table");  
         console.log(response);
-        setServerResponseReceived(true);
-        setLoading(false);
-        setFirstName("");
-        setLastName("");
-        setMiddleName("");
-        setTel2("");
-        setEmail(""); 
-      }).catch(error => console.log(error));
-    };
-
+        // setServerResponseReceived(true);
+        // setLoading(false);
+        // setFirstName("");
+        // setLastName("");
+        // setMiddleName("");
+        // setTel2("");
+        // setEmail(""); 
+      }).catch(error => console.log(error.response.data)); 
+    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/edit-user', {
+      userType: 'Individual',
+      firstName: firstName,
+      lastName: lastName,
+      middleName: middleName,
+      houseNo: houseNo,
+      province: province,
+      municipality: municipality,
+      wardNo: wardNo,
+      tole: tole,
+      tel1: tel1,
+      tel2: tel2,
+      email: email,
+    _id: editId
+    
+    }, 
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(response => { 
+        console.log("successful in edit profile of user table");  
+        console.log(response);
+        // setServerResponseReceived(true);
+        // setLoading(false);
+        // setFirstName("");
+        // setLastName("");
+        // setMiddleName("");
+        // setTel2("");
+        // setEmail(""); 
+      }).catch(error => console.log(error.response.data));}
+   
         
   const [filteredData, setFilteredData] = useState(tableData);
   const [searchValue, setSearchValue] = useState('');
@@ -472,9 +563,10 @@ function UserTable(){
   <center><span style={{color: '#32325D',fontSize:'30px',fontWeight:'700'}}>Edit Your Account</span></center>
   <div className='main-box  text-center'>
     <p>Please enter the User ID and temporary password for the User.</p><br/>
-    <form  onSubmit={(event) => handleSubmit( event)}>
+    
       <div className='meter-Table'>
         {consumerType4 == "Individual" ?
+        <form  onSubmit={(event) => handleSubmit( event)}>
         <table>
           <tbody>
             <tr>
@@ -570,7 +662,16 @@ function UserTable(){
               <td> {emailError &&<div className="error" style={{ color: 'red' }}>{emailError}</div>}</td>
             </tr>
           </tbody>
-        </table>:
+        </table>
+        <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
+      <Button className='meterButtons2' type='submit' value="submit"  onClick={() => {
+        
+        submitAddReader(firstName, middleName, lastName,houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType4,editId);
+         
+        
+      }}>  Submit</Button>
+        </form>      :
+        <form  onSubmit={(event) => handleSubmit2( event)}>
         <table>
         <tbody>
           <tr>
@@ -602,20 +703,19 @@ function UserTable(){
             <td> {emailError &&<div className="error" style={{ color: 'red' }}>{emailError}</div>}</td>
           </tr>
         </tbody>
-      </table>
-
-        }
-      </div>
-      <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
+      </table> <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
       <Button className='meterButtons2' type='submit' value="submit"  onClick={() => {
         
-        submitAddReader(firstName, middleName, lastName,houseNo, province, municipality, wardNo, tole,tel1,tel2,email,consumerType4,companyName,address, contactNum,email2,editId);
+        submitAddReader(companyName,address, contactNum,email2,editId);
          
         
-      }}>  Submit</Button>
+      }}>  Submit</Button></form>
+
+      }
+     
       
-      {loading && !serverResponseReceived && <LoadingSpinner />}
-      </form>        
+      
+      </div>
     </div>
           </Modal.Body>
         </Modal>
