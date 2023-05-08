@@ -270,7 +270,7 @@ function User() {
                 <div className="d-flex">
                   <div>
                     <select id="Municipalities" name="municipality" className="select_option" >
-                      <option value="">Municiplaity</option>
+                      <option value="">Municipality</option>
                       <option value="Kathmandu">    Kathmandu Metropolitan City  </option>
                       <option value="Lalitpur">    Lalitpur Metropolitan City </option>
                       <option value="Bhaktapur">    Bhaktapur Municipality</option>

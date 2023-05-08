@@ -35,12 +35,12 @@
   .navbar-links .nav-item:last-child {
     margin-left: auto;
   } */ 
-  
+
   .nav_pills {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px; 
+    height: 45px; 
   
   }
   
