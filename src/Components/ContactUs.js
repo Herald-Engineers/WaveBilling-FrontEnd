@@ -9,7 +9,8 @@ function Contact() {
     const [email, setEmail] = useState("");
     const [contactNum, setContact] = useState("");
     const [queries, setQueries] = useState("");
-
+    const 
+    [telError,setTelError] = useState("");
     const [loading, setLoading] = useState(false);
 
 
@@ -21,7 +22,17 @@ function Contact() {
     };
     
     const handleContactNum = (event) => {
-        setContact(event.target.value);
+        const phoneNumber = event.target.value;
+        setContact(phoneNumber);
+        const regex = /^[0-9]+$/; // regex pattern to match only digits
+        if (!regex.test(phoneNumber)) {
+        setTelError("Please enter numbers only");
+        } else if (phoneNumber.length !== 10) {
+        setTelError("Phone number must be 10 digits or less");
+        } else {
+        setTelError("");
+        }
+        
     };
     
     const handleEmail = (event) => {
@@ -73,6 +84,7 @@ function Contact() {
                         <input type="text" placeholder="Last Name" className='input_name' value={lastName} required onChange={handleLastName}/><br></br> 
                         <label>Phone Number</label><br></br>
                         <input type="text" placeholder="Phone Number" className='input_name' value={contactNum} required onChange={handleContactNum}/>
+                        {telError && <div className="error" style={{ color: 'red' }}>{telError}</div>}
                     </div> 
                 </div>
                 <div className='line_space'>

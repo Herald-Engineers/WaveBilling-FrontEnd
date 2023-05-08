@@ -181,10 +181,10 @@ function EditProfile() {
                                         </div>
                                     
 
-                                    <Button type='submit' className='btn btn-primary' style={{ marginTop: '8px' }}>Save Changes</Button>
+                                    
                                 </div>
 
-                            </div>
+                            </div><Button type='submit' className='btn btn-primary' style={{ marginTop: '8px' }}>Save Changes</Button>
 
                        
                         </form>

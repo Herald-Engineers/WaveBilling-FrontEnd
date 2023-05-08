@@ -17,16 +17,15 @@ function UserIssue(){
         setSubject(event.target.value);
     };
     const handleSubmit = (event) => {
-        const submitBtn = document.getElementById('contact-submit');
-        submitBtn.disabled = true;
+        
         setLoading(true);
 
         event.preventDefault();
         axios.post("https://wavebilling-backend-sabinlohani.onrender.com/submit-issue", {
             
             
-            subject: subject,
             issue: queries,
+            subject: subject
         },
         {
             headers: {
@@ -34,7 +33,6 @@ function UserIssue(){
             },
         })
         .then(res => {
-            submitBtn.disabled = false;
             setLoading(false);
 
             alert(res.data.message);

@@ -98,12 +98,13 @@ function Register(){
         setDueDate(event.target.value);
     };
     const handleContact = (event) => {
-        setContact(event.target.value);
+        const contactValue = event.target.value
+        setContact(contactValue);
         const regex = /^[0-9]+$/; // regex pattern to match only digits
-        if (!regex.test(contactNum)) {
+        if (!regex.test(contactValue)) {
             setTelError("Please enter numbers only");
-        } else if (contactNum.length !== 10) {
-            setTelError("Phone number must be 10 digits or less");
+        } else if (contactValue.length !== 10) {
+            setTelError("Phone number must be 10 digits");
         } else {
             setTelError("");
         }
