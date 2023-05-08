@@ -65,7 +65,8 @@ function Register(){
     const [tel1Error, setTelError] = useState("");
     const [data, setData] = useState(null);
     const [fullnameError, setFullNameError] = useState("");
-    
+    const [errorMessage, setErrorMessage] = useState("");
+
     const [modalShow, setModalShow] = React.useState(false);
     const handleCompanyName = (event) => {
         const companyNameValue = event.target.value;
@@ -112,6 +113,9 @@ function Register(){
       };
    
     const handleSubmit = (event) => {
+        setErrorMessage('');
+        const loginBtn = document.getElementById('submitCompany');
+        loginBtn.disabled = true;
         event.preventDefault();
         setLoading(true);
         if (!isChecked) {
@@ -146,7 +150,13 @@ function Register(){
                 console.log(response)
                 
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                loginBtn.disabled = false;
+                setLoading(false);
+                console.log(error);
+                setErrorMessage(error.response.data.message);
+                console.log(errorMessage);
+              });
         }
       };
     return(
@@ -319,6 +329,7 @@ function Register(){
                             <input type="submit" value="Submit" id="submitCompany"   onClick={() => setModalShow(true)}/><br/>
                             <Link to='/signinas'><button className='myCompanyButton'>Go Back</button></Link>
                         </center>
+                        {errorMessage && <div style={{ color: 'red'}}>{errorMessage}</div>}
                     </form>
                         {loading && !serverResponseReceived && <LoadingSpinner />}
                         {serverResponseReceived ? (
