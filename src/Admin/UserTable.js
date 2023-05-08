@@ -819,7 +819,7 @@ function handleApprove(approveId,consumerType) {
         }
     }).then(response => { 
         console.log("Approved successfully");  
-        window.location.reload();
+        // window.location.reload();
         console.log(response);
     }).catch(error => console.log(error.response.data));
 };
@@ -1072,7 +1072,7 @@ function UserTable(){
       },
     }).then(response => { 
         console.log("successful in edit profile of user table");  
-        window.location.reload();
+        // window.location.reload();
         // setServerResponseReceived(true);
         // setLoading(false);
         // setFirstName("");
@@ -1395,7 +1395,7 @@ function UserTable(){
           </tr>
         </tbody>
       </table> <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
-      <Button className='meterButtons2' type='submit' value="submit" onClick={() => handleShow()}>  Submit</Button></form>
+      <Button className='meterButtons2' type='submit' value="submit" onClick={() => {handleShow(); handleClose4();}}>  Submit</Button></form>
 
       }
 

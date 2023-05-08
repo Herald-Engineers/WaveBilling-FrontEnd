@@ -11,16 +11,16 @@ import { useNavigate } from 'react-router-dom';
 function HistorySection() {
   const location = useLocation();
   const id = location.state.id;
-  console.log("View History of Id: ", id);
+  console.log("Id is: ", id);
     const token = localStorage.getItem('token');
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
-        axios.get("https://wavebilling-backend-sabinlohani.onrender.com/my-receipts", {
+        axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-receipt-details", {
           headers: {
             Authorization: `Bearer ${token}`
           },
           params: {
-              _id: id
+            receiptId: id
           }
         })
         .then((response) => {console.log(response.data);setTableData(response.data)})
@@ -85,13 +85,14 @@ function PaymentSuccess(){
   const token = localStorage.getItem('token');
   const [tableData, setTableData] = useState([]);
   useEffect(() => {
-      axios.get("https://wavebilling-backend-sabinlohani.onrender.com/my-receipts", {
+      axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-receipt-details", {
         headers: {
           Authorization: `Bearer ${token}`
         },
-        params: {
-            _id: id
-        }
+        
+            params: {
+              receiptId: id
+            }
       })
       .then((response) => {console.log("Payment Success Data:",response.data);setTableData(response.data)})
       .catch((error) => console.log(error.response.data));

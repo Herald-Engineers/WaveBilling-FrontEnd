@@ -27,11 +27,15 @@ function Table() {
   const [tableData, setTableData] = useState([]);
   const [tableData2, setTableData2] = useState([]);
   const [editId, setEditId] = useState(null);
+  const[edit,setMyEditId] = useState(null);
+  console.log("Receipt is: ",edit);
   // console.log("Edit id: ", editId);
   useEffect(() => {
-    axios.get("https://wavebilling-backend-sabinlohani.onrender.com/my-receipts", {
+    axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-receipt-details", {
       headers: {
         Authorization: `Bearer ${token}`
+      },params: {
+        receiptId: edit
       }
     })
       .then((response) => {
@@ -39,7 +43,7 @@ function Table() {
         setTableData(response.data) 
     })
       .catch((error) => console.log(error.response.data));
-  }, []);
+  }, [edit]);
 
   useEffect(() => {
     axios.get("https://wavebilling-backend-sabinlohani.onrender.com/my-bills", {
@@ -53,11 +57,13 @@ function Table() {
   }, [editId]);
   function handleViewClick(id) {
     // Render the ViewDetails component
-    navigate("/viewDetails", { state: { id } });
+    console.log("My Pay bill Id is: ",editId);
+    navigate("/viewDetails", { state: { editId } });
   };
   function handleViewClick2(id) {
     // Render the ViewDetails component
-    navigate("/paymentSuccess", { state: { id } });
+    console.log("My Pay bill history Id is: ",edit);
+    navigate("/paymentSuccess", { state: { edit } });
   };
 
   return (
@@ -123,7 +129,7 @@ function Table() {
                 {/* <td>{row.paid ? (row.paid === true ? <span style={{color:'green'}}>'Paid'</span> : 'Overdue') : <span style={{color:'red'}}>Pending</span>}</td> */}
                 <td><button onClick={() => {
 
-                  handleViewClick2(row._id);
+                  {setMyEditId(row._id); handleViewClick2(row._id);}
                 }}>View</button></td>
               </tr>
             ))}

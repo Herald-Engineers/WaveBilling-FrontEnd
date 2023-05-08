@@ -25,12 +25,12 @@ function ConfirmPay() {
         setAdvancePayment(event.target.value);
     }
     useEffect(() => {
-        axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-bill-details", {
+        axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-receipt-details", {
             headers: {
                 Authorization: `Bearer ${token}`
             },
             params: {
-                _id: id
+                receiptId: id
             }
         })
             .then((response) => { console.log(response.data); setTableData(response.data); setIsLoading(false) })
@@ -52,7 +52,7 @@ function ConfirmPay() {
         })
             .then(res => {
 
-                navigate("/paymentSuccess");
+                navigate("/paymentSuccess", { state: { id } });
                 // Depending on the user role, navigate to a different page
                 console.log(res.data);
 

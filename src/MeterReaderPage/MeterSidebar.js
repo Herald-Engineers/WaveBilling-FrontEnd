@@ -87,13 +87,7 @@ function MeterReaderSidebar(){
                                 <p style={{fontSize: '14px', paddingLeft: '5px',margin: '0px'}} className="myfontcolor">Data Entry</p> 
                             </div>
                         </Nav.Link>
-                        <Nav.Link as={Link} to='/meterProfile' active={activeLink === 'meterProfile'} onClick={() => setActiveLink('meterProfile')} className='sidebar-fonts-dashboard sidebar-link' >
-                            <div className='d-flex'>
-                                {/* <img src={DashboardIcon2} alt="Wave Billing System" className="" />  */}
-                                <TbCalendarTime  size={18} style={{paddingTop:'2px'}}/>
-                                <p style={{fontSize: '16px', paddingLeft: '5px',margin: '0px',fontWeight:'600'}} className="myfontcolor">My Profile</p> 
-                            </div>
-                        </Nav.Link>
+                        
 
                         <Nav.Link as={Link} to='/meterIssue' active={activeLink === 'meterIssue'} onClick={() => setActiveLink('meterIssue')}  className='sidebar-fonts sidebar-link'>
                         {/* <img src={DashboardIcon} alt="Wave Billing System" className="" /> <br/> */}
