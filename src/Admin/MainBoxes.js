@@ -38,7 +38,7 @@ function MainBox(){
             
             <div className='d-flex'>
                 <Link to='/userTable'>
-                        <div className='firstbox' onClick={<Metereader/>}>
+                        <div className='firstbox' >
                             <div className=''>
                                 <div style={{float:'left'}}>
                                     <img src={Image1} alt="logout" className="" />
