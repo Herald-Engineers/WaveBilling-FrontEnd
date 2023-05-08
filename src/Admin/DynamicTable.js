@@ -7,8 +7,35 @@ import '../Admin/MeterReader.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import  {FiEdit} from "react-icons/fi";    
-import {MdDeleteOutline} from "react-icons/md"; 
-function submitAddReader(fullName, readerId, contactNum, email,editId) {
+import {MdDeleteOutline} from "react-icons/md";
+import { Link } from 'react-router-dom';
+import { MdVerified } from "react-icons/md"; 
+
+
+function MyVerticallyCenteredModal(props) {
+
+  return (
+    <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered  >
+
+      <Modal.Body style={{ padding: '68px', backgroundColor: '#D9D9D9' }}>
+        <center>
+          <MdVerified size={40} style={{ color: 'green' }} /><br />
+          <span style={{ color: '#32325D', fontSize: '30px', fontWeight: '700' }}>The data you’ve entered has <br/>been submitted successfully.</span></center>
+        <div className='main-box text-center'>
+
+          
+          <Link to='/meterReader'><Button onClick={props.onHide} className='i-understand'>Continue</Button></Link>
+        </div>
+      </Modal.Body>
+
+    </Modal>
+  );
+}
+
+
+
+  function submitAddReader(fullName, readerId, contactNum, email,editId) {
+    
   axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/admin/edit-reader', {
     fullName: fullName,
     readerId: readerId,
@@ -22,9 +49,11 @@ function submitAddReader(fullName, readerId, contactNum, email,editId) {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     }).then(response => { 
-      console.log("successful");  
+     
+      console.log("successful Submit add reader");  
       console.log(response);
-    }).catch(error => console.log(error));
+      window.location.reload();
+    }).catch(error => console.log(error.response.data));
 };
 
 function validatePhoneNumber(phoneNumber) {
@@ -43,14 +72,26 @@ function DynamicTable(){
   const [readerId, setReaderId] = useState("");
   const [contactNum, setContact] = useState("");
   const [email, setEmail] = useState("");
+ 
+  const [myModalShow2, setMyModalShow2] = useState(false);
+  
+  const [serverResponseReceived, setServerResponseReceived] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [tableData, setTableData] = useState([]);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const handleClose = () => setShow(false);
   const handleClose2 = () => setShow2(false);
+  const handleClose4 = () => setMyModalShow2(false);
   const [tel1Error, setTelError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [fullnameError, setFullNameError] = useState("");
   const [modalShow, setModalShow] = React.useState(false);
+  const [MyModalShow, setMyModalShow] = React.useState(false);
+  const handleShow = () => {
+    
+    setMyModalShow2(true);
+  };
+
   const handleContactNum = (event) => {
     const phoneNumber = event.target.value;
     setContact(phoneNumber);
@@ -91,8 +132,7 @@ function DynamicTable(){
       setEmailError("");
     }
   };
-  const [serverResponseReceived, setServerResponseReceived] = useState(false);
-  const [loading, setLoading] = useState(false);
+ 
   
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -102,7 +142,7 @@ function DynamicTable(){
     readerId: readerId,
     contactNum: contactNum,
     email: email,
-    _id: "6425d769c56d58d9766079e2",
+    _id: editId,
    
     }, 
     {
@@ -118,7 +158,7 @@ function DynamicTable(){
       setReaderId("");
       setContact("");
       setEmail(""); 
-    }).catch(error => console.log(error));
+    }).catch(error => console.log(error.response.data));
   };
 
   useEffect(() => {
@@ -202,7 +242,7 @@ function DynamicTable(){
               <td>{row.email}</td>
               <td>{row.contactNum}</td>
               <td>
-                <form onSubmit={handleSubmit}>
+                <form >
                   <FiEdit size={18} className="edit-icon" onClick={() => {
                     setEditId(row._id);
                     setShow(true);
@@ -222,7 +262,7 @@ function DynamicTable(){
               <td>{row.email}</td>
               <td>{row.contactNum}</td>
               <td>
-                <form onSubmit={handleSubmit}>
+                <form >
                   <FiEdit size={18} alt="Edit Meter Reader" className="edit-icon" style={{marginRight:'6px'}} onClick={() => {
                     setEditId(row._id);
                     setShow(true);
@@ -256,7 +296,7 @@ function DynamicTable(){
           <center><span style={{color: '#32325D',fontSize:'30px',fontWeight:'700'}}>Edit Your Account</span></center>
           <div className='main-box  text-center'>
             <p>Please enter the Reader ID and temporary password for the Reader.</p><br/>
-            <form  onSubmit={(event) => handleSubmit( event)}>
+            <form  onSubmit={(event) => handleSubmit(event)}>
               <div className='meter-Table'>
                 <table>
                   <tbody>
@@ -302,13 +342,28 @@ function DynamicTable(){
                 }
                 else{
                   submitAddReader(fullName, readerId, contactNum, email,editId);
+                  handleShow(true);
+                  handleClose();
                  
                 }
               }}>  Submit</Button>
               
-              {loading && !serverResponseReceived && <LoadingSpinner />}
-            </form>        
+              
+            </form>      
           </div>
+        </Modal.Body>
+      </Modal>
+
+
+      <Modal  show={myModalShow2} onHide={handleClose4} size="lg" aria-labelledby="contained-modal-title-vcenter" centered className='DeletePopOver'>
+        <Modal.Body style={{padding:'68px',backgroundColor:'#D9D9D9'}}>
+          <center><span style={{color: '#32325D',fontSize:'30px',fontWeight:'700'}}> Completed successfully</span></center>
+          <div className='justify-content-center main-box2  '>
+           
+          <Button onClick={handleClose4} className='meterButtons'>Continue</Button><br/>
+           
+          </div> 
+          
         </Modal.Body>
       </Modal>
     </>

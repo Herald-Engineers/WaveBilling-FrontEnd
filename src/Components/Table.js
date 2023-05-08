@@ -48,7 +48,7 @@ function Table() {
 
       }
     })
-      .then((response) => { console.log('Bill response data: ' + response.data); setTableData2(response.data) })
+      .then((response) => { console.log('Bill response data: ' + response); setTableData2(response.data);console.log("Due by is: ",response.data.dueBy); })
       .catch((error) => console.log(error.response.data));
   }, [editId]);
   function handleViewClick(id) {
@@ -83,11 +83,13 @@ function Table() {
                   <td>{new Date(row.billDate).toLocaleDateString()}</td>
                   <td>{row.dueBy.slice(0, 10)}</td>
                   <td>Rs. {row.totalAmount}</td>
+                  
 
                   {/* <td>{row.paid ? (row.paid === true ? <span style={{color:'green'}}>'Paid'</span> : 'Overdue') : <span style={{color:'red'}}>Pending</span>}</td> */}
                   <td><button onClick={() => {
                     setEditId(row._id);
                     handleViewClick(row._id);
+                    localStorage.setItem('dueBy', row.dueBy.slice(0, 10));
                   }}>View</button></td>
                 </tr>
               ))

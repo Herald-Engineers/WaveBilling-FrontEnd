@@ -13,8 +13,14 @@ function Otp() {
       
       <form>
             <input type="text" placeholder="Enter OTP" className="login-field"/>
+           
+      <form>
+            <input type="password" placeholder="New Password" className="login-field"/>
         </form>
-      <Link to="/createAcc"><button className='btn btn-primary' >Verify</button></Link>
+        
+        <Link to="/createAcc"><button className='btn btn-primary' >Verify</button></Link>
+      </form>
+     
       
     </div>
   );

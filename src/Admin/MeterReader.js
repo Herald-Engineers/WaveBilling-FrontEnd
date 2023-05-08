@@ -28,7 +28,7 @@ function MyVerticallyCenteredModal1(props) {
                     <span style={{ color: '#32325D', fontSize: '30px', fontWeight: '700' }}>The data you’ve entered has <br/>been submitted successfully.</span>
                 </center>
                 <div className='main-box text-center'>
-                    <Link to='/dataEntry'><Button onClick={props.onHide} className='i-understand'>Continue</Button></Link>
+                    <Link to='/meterReader'><Button onClick={props.onHide} className='i-understand'>Continue</Button></Link>
                 </div>
             </Modal.Body>
     
@@ -37,23 +37,7 @@ function MyVerticallyCenteredModal1(props) {
 }
 
 function MyVerticallyCenteredModal(props) {
-    function MyVerticallyCenteredModal1(props) {
-
-        return (
-            <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered  >
-                <Modal.Body style={{ padding: '68px', backgroundColor: '#D9D9D9' }}>
-                    <center>
-                        <MdVerified size={40} style={{ color: 'green' }} /><br />
-                        <span style={{ color: '#32325D', fontSize: '30px', fontWeight: '700' }}>The data you’ve entered has <br/>been submitted successfully.</span>
-                    </center>
-                    <div className='main-box text-center'>
-                        <Link to='/meterReader'><Button onClick={props.onHide} className='i-understand'>Continue</Button></Link>
-                    </div>
-                </Modal.Body>
-        
-            </Modal>
-        );
-    }
+    
     // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJyYW1lc2giLCJ1c2VyUm9sZSI6ImFkbWluIiwiaWQiOiI2NDFhZmQ1ODJiMzYxZDI3ODY2NzRmNjEiLCJpYXQiOjE2ODAwOTI2NjB9.1-rmZNz7uaa_AH6wil2n6L-eRCA5EvXKbhDn9XHYSJU';
     // Set the token in local storage
     // localStorage.setItem('token', token);

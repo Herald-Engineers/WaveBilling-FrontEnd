@@ -818,7 +818,8 @@ function handleApprove(approveId,consumerType) {
             Authorization: `Bearer ${token}`
         }
     }).then(response => { 
-        console.log("successful");  
+        console.log("Approved successfully");  
+        window.location.reload();
         console.log(response);
     }).catch(error => console.log(error.response.data));
 };
@@ -928,6 +929,12 @@ function UserTable(){
   const [consumerType2, setConsumerType2] = useState(null);
   const [consumerType3, setConsumerType3] = useState(null);
   const [consumerType4, setConsumerType4] = useState(null);
+  const [MyModalShow, setMyModalShow] = React.useState(false);
+  const handleCLoseEdit = () => setMyModalShow(false);
+  const handleShow = () => {
+    
+    setMyModalShow(true);
+  };
   console.log(consumerType4);
   const [deleteId, setDeleteId] = useState(null);
   const [emailError, setEmailError] = useState("");
@@ -1065,7 +1072,7 @@ function UserTable(){
       },
     }).then(response => { 
         console.log("successful in edit profile of user table");  
-      
+        window.location.reload();
         // setServerResponseReceived(true);
         // setLoading(false);
         // setFirstName("");
@@ -1351,7 +1358,7 @@ function UserTable(){
           </tbody>
         </table>
         <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
-      <Button className='meterButtons2' type='submit' value="submit">  Submit</Button>
+      <Button className='meterButtons2' type='submit' value="submit" onClick={() => handleShow()}>  Submit</Button>
         </form>
         :
         
@@ -1388,18 +1395,26 @@ function UserTable(){
           </tr>
         </tbody>
       </table> <Button onClick={handleClose4} className='meterButtons'>Go Back</Button>
-      <Button className='meterButtons2' type='submit' value="submit">  Submit</Button></form>
+      <Button className='meterButtons2' type='submit' value="submit" onClick={() => handleShow()}>  Submit</Button></form>
 
       }
-     
-      
-      
+
       </div>
     </div>
           </Modal.Body>
         </Modal>
 
-
+        <Modal  show={MyModalShow} onHide={handleCLoseEdit} size="lg" aria-labelledby="contained-modal-title-vcenter" centered className='DeletePopOver'>
+        <Modal.Body style={{padding:'68px',backgroundColor:'#D9D9D9'}}>
+          <center><span style={{color: '#32325D',fontSize:'30px',fontWeight:'700'}}> Completed successfully</span></center>
+          <div className='justify-content-center main-box2  '>
+           
+          <Button onClick={handleCLoseEdit} className='meterButtons'>Continue</Button><br/>
+           
+          </div> 
+          
+        </Modal.Body>
+      </Modal>
       
     
     </div>

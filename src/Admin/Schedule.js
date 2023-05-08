@@ -1,4 +1,5 @@
 import MyAdmin from '../Admin/AdminSidebar';
+import React from 'react';
 import  '../HomePage/Homepage.css';
 import  '../Admin/AdminDash.css';
 import  '../Components/SmallLogo.css';
@@ -6,12 +7,40 @@ import {  useState, useEffect} from 'react';
 import axios from 'axios';
 import ViewSchedule from '../Admin/ViewSchedule';
 
+import { Link, useNavigate } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import LoadingSpinner from '../Components/LoadingSpinner';
+import { MdVerified } from "react-icons/md";
 import Calendar from '../Image/Calendar.png';
+
+
+function MyVerticallyCenteredModal(props) {
+
+    return (
+      <Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered  >
+  
+        <Modal.Body style={{ padding: '68px', backgroundColor: '#D9D9D9' }}>
+          <center>
+            <MdVerified size={40} style={{ color: 'green' }} /><br />
+            <span style={{ color: '#32325D', fontSize: '30px', fontWeight: '700' }}>The data you’ve entered has <br/>been submitted successfully.</span></center>
+          <div className='main-box text-center'>
+  
+            
+            <Link to='/schedule'><Button onClick={props.onHide} className='i-understand'>Continue</Button></Link>
+          </div>
+        </Modal.Body>
+  
+      </Modal>
+    );
+}
 function Schedule(){
     const token = localStorage.getItem('token');
     const [tableData, setTableData] = useState([]);
     const [reader, setReader] = useState(null);
-
+    const [modalShow, setModalShow] = React.useState(false);
+    const [serverResponseReceived, setServerResponseReceived] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const [address1, setAddress1] = useState("");
     const [address2, setAddress2] = useState("");
@@ -63,7 +92,8 @@ function Schedule(){
           },
         })
         .then(res => {
-          
+            setServerResponseReceived(true);
+            setLoading(false);
           console.log(res.data);
         })
         .catch(error => {
@@ -147,9 +177,12 @@ function Schedule(){
 
                                 </div>
                             </div>
-                            <input type="submit" value="Save and Submit" id='submitSchedule'/>
+                            <input type="submit" value="Save and Submit" id='submitSchedule' onClick={() => setModalShow(true)}/>
                         </form>
-                    
+                        {loading && !serverResponseReceived && <LoadingSpinner />}
+                        {serverResponseReceived ? (
+                            <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
+                        ) : null}
                     </div>
                     <ViewSchedule />  
                 

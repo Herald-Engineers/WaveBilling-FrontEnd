@@ -9,12 +9,18 @@ import {PDFDownloadLink, Document, Page, View, Text } from '@react-pdf/renderer'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function HistorySection() {
+  const location = useLocation();
+  const id = location.state.id;
+  console.log("View History of Id: ", id);
     const token = localStorage.getItem('token');
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
         axios.get("https://wavebilling-backend-sabinlohani.onrender.com/my-receipts", {
           headers: {
             Authorization: `Bearer ${token}`
+          },
+          params: {
+              _id: id
           }
         })
         .then((response) => {console.log(response.data);setTableData(response.data)})
@@ -73,18 +79,23 @@ function HistorySection() {
       );
     }
 function PaymentSuccess(){
-
-    const token = localStorage.getItem('token');
-    const [tableData, setTableData] = useState([]);
-    useEffect(() => {
-        axios.get("https://wavebilling-backend-sabinlohani.onrender.com/my-receipts", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        .then((response) => {console.log(response.data);setTableData(response.data)})
-        .catch((error) => console.log(error.response.data));
-      }, []);
+  const location = useLocation();
+  const id = location.state.id;
+  console.log("Payment Success Page of Id: ", id);
+  const token = localStorage.getItem('token');
+  const [tableData, setTableData] = useState([]);
+  useEffect(() => {
+      axios.get("https://wavebilling-backend-sabinlohani.onrender.com/my-receipts", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        params: {
+            _id: id
+        }
+      })
+      .then((response) => {console.log("Payment Success Data:",response.data);setTableData(response.data)})
+      .catch((error) => console.log(error.response.data));
+    }, []);
     const MyDoc = () => (
         console.log('MyDoc component rendered'),
         <Document>

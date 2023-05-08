@@ -93,7 +93,6 @@ function ConfirmPay() {
                                             </tr>
                                             <tr>
                                                 <td>Advance Payment (Optional): </td>
-
                                             </tr>
                                             <tr>
                                                 <td><input type='number' defaultValue={0} name='advancePayment' onChange={handleAdvance} /></td>
