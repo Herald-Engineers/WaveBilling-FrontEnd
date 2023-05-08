@@ -52,7 +52,7 @@ function MyVerticallyCenteredModal(props) {
      
       console.log("successful Submit add reader");  
       console.log(response);
-      window.location.reload();
+      // window.location.reload();
     }).catch(error => console.log(error.response.data));
 };
 
