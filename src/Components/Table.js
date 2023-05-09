@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function Table() {
+function  Table() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
@@ -56,14 +56,16 @@ function Table() {
       .catch((error) => console.log(error.response.data));
   }, [editId]);
   function handleViewClick(id) {
+    setEditId(id);
     // Render the ViewDetails component
-    console.log("My Pay bill Id is: ",editId);
-    navigate("/viewDetails", { state: { editId } });
+    console.log("My Pay bill Id is: ",id);
+    navigate("/viewDetails", { state: { id } });
   };
   function handleViewClick2(id) {
+    setMyEditId(id);
     // Render the ViewDetails component
-    console.log("My Pay bill history Id is: ",edit);
-    navigate("/paymentSuccess", { state: { edit } });
+    console.log("My Pay bill history Id is: ",id);
+    navigate("/paymentSuccess", { state: { id } });
   };
 
   return (
@@ -93,7 +95,7 @@ function Table() {
 
                   {/* <td>{row.paid ? (row.paid === true ? <span style={{color:'green'}}>'Paid'</span> : 'Overdue') : <span style={{color:'red'}}>Pending</span>}</td> */}
                   <td><button onClick={() => {
-                    setEditId(row._id);
+                      
                     handleViewClick(row._id);
                     localStorage.setItem('dueBy', row.dueBy.slice(0, 10));
                   }}>View</button></td>
@@ -118,7 +120,18 @@ function Table() {
           </thead>
           <tbody>
 
-            {tableData.map((row) => (
+           
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  );
+}
+export default Table;
+
+
+ {/* {tableData.map((row) => (
               <tr key={row._id}>
 
 
@@ -127,18 +140,10 @@ function Table() {
                 <td>{row.totalAmount}</td>
 
                 {/* <td>{row.paid ? (row.paid === true ? <span style={{color:'green'}}>'Paid'</span> : 'Overdue') : <span style={{color:'red'}}>Pending</span>}</td> */}
-                <td><button onClick={() => {
+            //     <td><button onClick={() => {
 
-                  {setMyEditId(row._id); handleViewClick2(row._id);}
-                }}>View</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-export default Table;
-
-
+            //       { handleViewClick2(row._id);}
+            //     }}>View</button></td>
+            //   </tr>
+            // ))} 
+            // */}
