@@ -7,10 +7,11 @@ import Esewa from '../Image/esewa.png';
 import { useParams } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+
 function PayNow(){
     const navigate = useNavigate();
     const location = useLocation();
-    const id = location.state.id;
+    const id = location.state?.id;
     console.log("Pay Now Id: ",id);
 
     function handleViewClick(paymentMethod){

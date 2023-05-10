@@ -9,6 +9,7 @@ import { PDFDownloadLink, Document, Page, View, Text } from '@react-pdf/renderer
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 function HistorySection(props) {
   const location = useLocation();
   const { id } = location.state;
@@ -83,6 +84,8 @@ function HistorySection(props) {
 }
 
 
+
+
 function ViewDetails() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -90,6 +93,14 @@ function ViewDetails() {
   console.log("View details: ", id);
   const token = localStorage.getItem('token');
   const [tableData, setTableData] = useState([]);
+  const[edit,setMyEditId] = useState(null);
+  function handleViewClick(id) {
+  
+ 
+    console.log("Handle View Click: ",id);
+    // Render the ViewDetails component
+    navigate("/payNow", { state: { id } });
+  }
   useEffect(() => {
     axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-bill-details", {
       headers: {
@@ -111,6 +122,7 @@ function ViewDetails() {
       marginBottom: '20px'
     }
   }
+  
   const MyDoc = () => (
     <Document>
       <Page>
@@ -133,10 +145,7 @@ function ViewDetails() {
       </Page>
     </Document>
   );
-  function handleViewClick(id) {
-    // Render the ViewDetails component
-    navigate("/payNow", { state: { id } });
-  };
+  
 
 
   return (

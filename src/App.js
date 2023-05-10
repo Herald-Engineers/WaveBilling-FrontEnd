@@ -47,6 +47,7 @@ import ScheduleMeterReader from './MeterReaderPage/ScheduleMeterReader';
 import MeterIssue from './MeterReaderPage/MeterIssue';
 import MeterProfile from './MeterReaderPage/MeterProfile';
 import PaymentSuccess from './HomePage/PaymentSuccess';
+import ViewPaid from './HomePage/VIewPaymentSuccess';
 import ProfileIndividual from './HomePage/ProfileIndividual';
 function App() {
 
@@ -100,6 +101,7 @@ function App() {
         <Route path="/confirmPayment" element={<ConfirmPayment />} />
         <Route path="/paymentSuccess" element={<PaymentSuccess />} />
         <Route path="/profileIndividual" element={<ProfileIndividual />} />
+        <Route path="/viewPaid" element={<ViewPaid />} />
         
       </Routes>
     </BrowserRouter>

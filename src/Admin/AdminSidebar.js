@@ -123,7 +123,7 @@ function AdminSidebar(){
                             </div>
                         </Nav.Link>
 
-                        <Nav.Link as={Link} to='/adminProfile' active={activeLink === 'settings'} style={{ flex: 1, bottom:'0', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }} onClick={() => setActiveLink('settings')}  className='sidebar-fonts sidebar-link'>
+                        <Nav.Link as={Link}  active={activeLink === 'settings'} style={{ flex: 1, bottom:'0', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }} onClick={() => setActiveLink('settings')}  className='sidebar-fonts sidebar-link'>
                     
                             <div className='' style={{bottom:'0',position:'fixed',paddingBottom:'10px',marginBottom:'30px', marginLeft:'19px'}}>
                                 <img src={MyProfile} alt="Profile Picture" className="myProfilePic" /> <br/>

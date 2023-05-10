@@ -31,11 +31,9 @@ function  Table() {
   console.log("Receipt is: ",edit);
   // console.log("Edit id: ", editId);
   useEffect(() => {
-    axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-receipt-details", {
+    axios.get("https://wavebilling-backend-sabinlohani.onrender.com/my-receipts", {
       headers: {
         Authorization: `Bearer ${token}`
-      },params: {
-        receiptId: edit
       }
     })
       .then((response) => {
@@ -120,6 +118,21 @@ function  Table() {
           </thead>
           <tbody>
 
+          {tableData.map((row) => (
+              <tr key={row._id}>
+
+
+                <td>{new Date(row.paymentDate).toLocaleDateString()}</td>
+                <td>{row.paymentMode}</td>
+                <td>{row.totalAmount}</td>
+
+                {/* <td>{row.paid ? (row.paid === true ? <span style={{color:'green'}}>'Paid'</span> : 'Overdue') : <span style={{color:'red'}}>Pending</span>}</td>  */}
+                <td><button onClick={() => {
+
+                  { handleViewClick2(row._id);}
+                }}>View</button></td>
+              </tr>
+            ))} 
            
           </tbody>
         </table>
@@ -131,19 +144,4 @@ function  Table() {
 export default Table;
 
 
- {/* {tableData.map((row) => (
-              <tr key={row._id}>
-
-
-                <td>{new Date(row.paymentDate).toLocaleDateString()}</td>
-                <td>{row.paymentMode}</td>
-                <td>{row.totalAmount}</td>
-
-                {/* <td>{row.paid ? (row.paid === true ? <span style={{color:'green'}}>'Paid'</span> : 'Overdue') : <span style={{color:'red'}}>Pending</span>}</td> */}
-            //     <td><button onClick={() => {
-
-            //       { handleViewClick2(row._id);}
-            //     }}>View</button></td>
-            //   </tr>
-            // ))} 
-            // */}
+           

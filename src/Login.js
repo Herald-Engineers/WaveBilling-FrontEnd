@@ -112,8 +112,7 @@ function Login() {
               <div className="button-container">
                 <input type="checkbox" name="lsRememberMe" id='lsRememberMe' />
                 <label style={{ color: '#B1ABAB', fontSize: '14px', margin: '0 5px' }} htmlFor='lsRememberMe'>Remember me</label>
-                <Link to='/nextpage'><span style={{ fontSize: '13px' }} className='myforgot' >Forgot Password?</span></Link>
-
+               
               </div>
               <button type="submit" className='btn btn-primary' id='login-button'>Login</button>
               <p style={{ color: '#B1ABAB', fontSize: '12px', paddingLeft: '42px', paddingTop: '10px' }}>Don't have an account?<Link to='/signinas'>{'\n'}Gets yours now</Link></p>

@@ -7,12 +7,9 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 function ConfirmPay() {
     const navigate = useNavigate();
-    function handleNextClick() {
-        // Render the ViewDetails component
-        navigate("/paymentSuccess");
-    };
+    
     const location = useLocation();
-    const id = location.state.id;
+    const id = location.state?.id;
     const paymentMethod = location.state.paymentMethod;
     console.log("Confirm Pay Id: ", id);
     const token = localStorage.getItem('token');
@@ -20,27 +17,31 @@ function ConfirmPay() {
     const [isLoading, setIsLoading] = useState(true);
 
     const [advancePayment, setAdvancePayment] = useState('');
-
+    function handleNextClick(id) {
+        navigate('/viewPaid');
+    }
     function handleAdvance(event) {
         setAdvancePayment(event.target.value);
     }
     useEffect(() => {
-        axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-receipt-details", {
+        console.log('Confirm Bill  is : ' + id);
+        axios.get("https://wavebilling-backend-sabinlohani.onrender.com/fetch-bill-details", {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
             },
             params: {
-                receiptId: id
+                _id: id
             }
         })
             .then((response) => { console.log(response.data); setTableData(response.data); setIsLoading(false) })
             .catch((error) => console.log(error.response.data));
-    }, []);
+    }, [id,token]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        // Send a POST request to the server with the entered username and password
+        // Send a POST request to the server with the selected payment method, bill id and advance payment
         axios.post("https://wavebilling-backend-sabinlohani.onrender.com/pay-bill", {
             paymentMode: paymentMethod,
             billId: id,
@@ -52,7 +53,7 @@ function ConfirmPay() {
         })
             .then(res => {
 
-                navigate("/paymentSuccess", { state: { id } });
+                // navigate("/paymentSuccess", { state: { id } });
                 // Depending on the user role, navigate to a different page
                 console.log(res.data);
 
@@ -63,6 +64,8 @@ function ConfirmPay() {
 
             });
     };
+
+    
 
     return (
         <div className='containerHome'>
@@ -100,10 +103,13 @@ function ConfirmPay() {
                                         </table>
                                         <div className='buttonAlign'>
                                             <Link to="/payNow"><button className='btn btn-secondary'>Back</button></Link>
-                                            <button className='btn btn-primary nextButton' type='submit'  >Pay</button>
+                                            <button className='btn btn-primary nextButton' type='submit' onClick={() => handleNextClick(id)} >Pay</button>
                                         </div>
                                     </form>
-                                }
+                                 }
+                                  {/* <p>
+                                   <Link to="/viewPaid"><button>Yes</button></Link> 
+                                 </p> */}
                             </center>
                         </div>
                     </div>

@@ -10,8 +10,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function HistorySection() {
   const location = useLocation();
-  const id = location.state.id;
-  console.log("Id is: ", id);
+  const id = location.state?.id;
+  console.log("History Section Id is: ", id);
     const token = localStorage.getItem('token');
     const [tableData, setTableData] = useState([]);
     useEffect(() => {
@@ -23,7 +23,7 @@ function HistorySection() {
             receiptId: id
           }
         })
-        .then((response) => {console.log(response.data);setTableData(response.data)})
+        .then((response) => {console.log("Payment Success Data in payment Success page:",response.data);setTableData(response.data)})
         .catch((error) => console.log(error.response.data));
       }, []);
       return (
@@ -40,38 +40,34 @@ function HistorySection() {
   
           
           <table className='' style={{fontSize:'20px'}}>
-          {tableData.map((row) => (
-            <React.Fragment key={row.id}>
-              <tr>
-                <th>Receipt date:</th>
-                <td>{new Date(row.paymentDate).toLocaleDateString()}</td>
-              </tr>
-              
-              <tr>
-                <th>Customer Id:</th>
-                <td>{row.consumerId}</td>
-              </tr>
-              <tr>
-                 <th>Customer Name: </th>
-                <td>{row.consumerName}</td>
-              </tr>
-                    <tr>
-                      <th>Customer Address:</th> <td>{row.consumerAddress}</td></tr>
-                    
-                    <tr>
-                      <th>Bill Amount:</th><td> {row.billAmount}</td></tr>
-                    <tr>
-                      <th>Meter No: </th><td>{row.meterNo}</td></tr>
-                    
-                    <tr>
-                      <th>Payment Mode:</th><td> {row.paymentMode}</td></tr>
-                    <tr>
-                      <th>Previous Advance Amount: </th><td>{row.previousAdvanceAmount}</td></tr>
-                    
-                    <tr>
-                      <th>Total Amount Paid: </th><td>{row.totalAmount}</td></tr>
-            </React.Fragment>
-             ))}
+          <tr>
+      <th>Receipt date:</th>
+      <td>{new Date(tableData.paymentDate).toLocaleDateString()}</td>
+    </tr>
+    
+    <tr>
+      <th>Customer Id:</th>
+      <td>{tableData.consumerId}</td>
+    </tr>
+    <tr>
+       <th>Customer Name: </th>
+      <td>{tableData.consumerName}</td>
+    </tr>
+          <tr>
+            <th>Customer Address:</th> <td>{tableData.consumerAddress}</td></tr>
+          
+          <tr>
+            <th>Bill Amount:</th><td> {tableData.billAmount}</td></tr>
+          <tr>
+            <th>Meter No: </th><td>{tableData.meterNo}</td></tr>
+          
+          <tr>
+            <th>Payment Mode:</th><td> {tableData.paymentMode}</td></tr>
+          <tr>
+            <th>Previous Advance Amount: </th><td>{tableData.previousAdvanceAmount}</td></tr>
+          
+          <tr>
+            <th>Total Amount Paid: </th><td>{tableData.totalAmount}</td></tr>
           </table>
           </div>
           </div>
@@ -80,7 +76,7 @@ function HistorySection() {
     }
 function PaymentSuccess(){
   const location = useLocation();
-  const id = location.state.id;
+  const id = location.state?.id;
   console.log("Payment Success Page of Id: ", id);
   const token = localStorage.getItem('token');
   const [tableData, setTableData] = useState([]);
@@ -94,7 +90,7 @@ function PaymentSuccess(){
               receiptId: id
             }
       })
-      .then((response) => {console.log("Payment Success Data:",response.data);setTableData(response.data)})
+      .then((response) => {console.log("Payment Success Data in payment Success page:",response.data);setTableData(response.data)})
       .catch((error) => console.log(error.response.data));
     }, []);
     const MyDoc = () => (
@@ -103,21 +99,18 @@ function PaymentSuccess(){
           <Page>
             <View style={{ marginBottom: 8, padding:'30px'}}>
               <Text style={{marginBottom:'20px',fontSize:'19px',fontWeight:'800',textAlign:'center'}}>Payment Successful </Text>
-              <Text style={{marginBottom:'20px',fontSize:'16px',fontWeight:'600',textAlign:'center'}}>Your bill has been successgully paid</Text>
-             
-              {tableData.map((row) => (
-                <React.Fragment key={row.id} className="downloadHistory">
-                 <b> <Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'800'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'1000',color:'#2F4858',marginRight:'5px'}} >Payment Date: </Text>{new Date(row.paymentDate).toLocaleDateString()}</Text></b>
-                  <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Id: </Text>{row.consumerId}</Text>
-                  <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Name:  </Text>{row.consumerName}</Text>
-                  <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Address:  </Text>{row.consumerAddress}</Text>
-                  <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Meter No: </Text>{row.meterNo}</Text>
-                  <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Bill Amount: </Text>{row.billAmount}</Text>
-                  <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Payment Mode: </Text>{row.paymentMode}</Text>
-                  <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Previous Advance Amount: </Text>{row.previousAdvanceAmount}</Text>
-                  <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Total to be paid: </Text>{row.totalAmount}</Text>
-                </React.Fragment>
-              ))}
+              <Text style={{marginBottom:'20px',fontSize:'16px',fontWeight:'600',textAlign:'center'}}>Your bill has been successfully paid</Text>
+              <b> <Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'800'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'1000',color:'#2F4858',marginRight:'5px'}} >Payment Date: </Text>{new Date(tableData.paymentDate).toLocaleDateString()}</Text></b>
+    <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Id: </Text>{tableData.consumerId}</Text>
+    <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Name:  </Text>{tableData.consumerName}</Text>
+    <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Address:  </Text>{tableData.consumerAddress}</Text>
+    <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Meter No: </Text>{tableData.meterNo}</Text>
+    <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Bill Amount: </Text>{tableData.billAmount}</Text>
+    <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Payment Mode: </Text>{tableData.paymentMode}</Text>
+    <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Previous Advance Amount: </Text>{tableData.previousAdvanceAmount}</Text>
+    <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Total to be paid: </Text>{tableData.totalAmount}</Text>
+ 
+              
             </View>
           </Page>
         </Document>
@@ -150,3 +143,55 @@ function PaymentSuccess(){
     );
 }
 export default PaymentSuccess;
+
+// {tableData.map((row) => (
+//   <React.Fragment key={row.id} className="downloadHistory">
+//    <b> <Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'800'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'1000',color:'#2F4858',marginRight:'5px'}} >Payment Date: </Text>{new Date(row.paymentDate).toLocaleDateString()}</Text></b>
+//     <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Id: </Text>{row.consumerId}</Text>
+//     <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Name:  </Text>{row.consumerName}</Text>
+//     <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Customer Address:  </Text>{row.consumerAddress}</Text>
+//     <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Meter No: </Text>{row.meterNo}</Text>
+//     <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Bill Amount: </Text>{row.billAmount}</Text>
+//     <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Payment Mode: </Text>{row.paymentMode}</Text>
+//     <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Previous Advance Amount: </Text>{row.previousAdvanceAmount}</Text>
+//     <Text style={{marginBottom:'10px',fontSize:'13px',fontWeight:'bolder'}}><Text style={{marginBottom:'20px',fontSize:'13px',fontWeight:'bolder',color:'#2F4858',marginRight:5}} >Total to be paid: </Text>{row.totalAmount}</Text>
+//   </React.Fragment>
+// ))}
+
+
+// {tableData.map((row) => (
+//   <React.Fragment key={row.id}>
+//     <tr>
+//       <th>Receipt date:</th>
+//       <td>{new Date(row.paymentDate).toLocaleDateString()}</td>
+//     </tr>
+    
+//     <tr>
+//       <th>Customer Id:</th>
+//       <td>{row.consumerId}</td>
+//     </tr>
+//     <tr>
+//        <th>Customer Name: </th>
+//       <td>{row.consumerName}</td>
+//     </tr>
+//           <tr>
+//             <th>Customer Address:</th> <td>{row.consumerAddress}</td></tr>
+          
+//           <tr>
+//             <th>Bill Amount:</th><td> {row.billAmount}</td></tr>
+//           <tr>
+//             <th>Meter No: </th><td>{row.meterNo}</td></tr>
+          
+//           <tr>
+//             <th>Payment Mode:</th><td> {row.paymentMode}</td></tr>
+//           <tr>
+//             <th>Previous Advance Amount: </th><td>{row.previousAdvanceAmount}</td></tr>
+          
+//           <tr>
+//             <th>Total Amount Paid: </th><td>{row.totalAmount}</td></tr>
+//   </React.Fragment>
+//    ))}
+
+
+
+
