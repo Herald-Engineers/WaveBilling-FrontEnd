@@ -50,11 +50,9 @@ function MyVerticallyCenteredModal(props) {
     const [contactNum, setContact] = useState("");
     const [email, setEmail] = useState("");
     const [tel1Error, setTelError] = useState("");
-    const [isValidEmail, setIsValidEmail] = useState(false);
     const [emailError, setEmailError] = useState("");
     const [fullnameError, setFullNameError] = useState("");
-    const [isChecked, setIsChecked] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
+   
     const [modalShow2, setModalShow2] = React.useState(false);
     // Retrieve the token from localStorage
     // const token = localStorage.getItem('token');

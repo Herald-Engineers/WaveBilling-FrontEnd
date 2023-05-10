@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import '../Css/Sidebar.css';
 import { useLocation } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-import DashboardIcon from '../Image/PayBill.png';
-import DashboardIcon2 from '../Image/dashboard.png';
 import MyProfile from '../Image/MyProfile.png';
 import  { TbDashboard } from "react-icons/tb";
 import  { TbCalendarTime } from "react-icons/tb";

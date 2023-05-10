@@ -2,7 +2,7 @@ import React, {useState}from 'react';
 import MyImage from './Image/logo123.png';
 import './App.css';
 import './Components/form.css';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function NextPage() {
