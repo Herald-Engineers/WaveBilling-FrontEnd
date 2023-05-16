@@ -110,7 +110,7 @@ function Register(){
             setTelError("");
         }
         
-      };
+    };
    
     const handleSubmit = (event) => {
         setErrorMessage('');
@@ -229,7 +229,7 @@ function Register(){
                                         <input type="text" name = "fullname" id="inputField" placeholder='Full Name' required className='login-field'/><br /> 
                                         <input type="text" name = "email2" id="inputField" placeholder='Email Address' required  className='login-field'/><br />
                                         <input type="text" name = "jobTitle" id="inputField" placeholder='Job Title' required className='login-field'/><br />
-                                        <input type="text" name = "contactNum" value={contactNum } id="inputField" placeholder='Contact Number' required className='login-field' onChange={handleContact}/><br />
+                                        <input type="text" name = "contactNum" value={contactNum }  onChange={handleContact} id="inputField" placeholder='Contact Number' required className='login-field'/><br />
                                         {tel1Error && <div className="error" style={{ color: 'red' }}>{tel1Error}</div>}
                                     </td>   
                                 </tr>

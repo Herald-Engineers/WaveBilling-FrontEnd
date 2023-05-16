@@ -70,9 +70,12 @@ function EditProfile() {
         color: '#525252',
 
     };
+
+    
     const submitAddReader = (event) => {
         setPasswordError('');
         event.preventDefault();
+        // check if new password and current password is correct
         if (newPassword !== confirmPassword) {
             setPasswordError('Passwords do not match');
             return;
@@ -84,6 +87,7 @@ function EditProfile() {
             currPassword: currentPassword,
             newPassword: newPassword
         })
+        //use patch method
         axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/edit-profile-info', {
             companyName: companyName,
             contactNum: contactNum,
@@ -92,9 +96,10 @@ function EditProfile() {
             newPassword: newPassword
         }, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,           // send headers for authorization
             },
         }).then(response => {
+            // print the responses to serverD
                 console.log("successful");
                 console.log(response.data);
             }).catch(error => {

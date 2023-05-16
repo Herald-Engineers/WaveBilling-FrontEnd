@@ -45,18 +45,7 @@ function DataEntry(){
     const [errorMessage2, setErrorMessage2] = useState('');
     const [errorMessage3, setErrorMessage3] = useState('');
     const [unitRate, setUnitRate] = useState(10); // assuming a default unit rate of 10
-    // const handlePreviousReading = (event) => {
-    //     const previous_reading =event.target.value;
-    //     setPreviousReading(event.target.value);
-    //     if (/^[0-9]*$/.test(previous_reading)) {
-    //         setPreviousReading(previous_reading);
-    //         setErrorMessage2('');
-    //     }
-    //     else{
-    //         setPreviousReading('');
-    //         setErrorMessage2('Please enter numbers only');
-    //     }
-    // };
+  
     const handleCurrentReading = (event) => {
         const current_reading =event.target.value;
         setCurrentReading(event.target.value);
@@ -184,6 +173,7 @@ function DataEntry(){
                                     <p>Select the name of the customer: </p>
                                     <select className='inputBox' name='assignedTo' required style={{marginRight:'10px'}} onChange={handleCustomerSelect} >
                                         <option>Select the name of the customer</option>
+                                        {/* fetch the data */}
                                         {
                                             tableData.map((row) => (
                                             <option key={row._id} value={row._id}>
@@ -194,16 +184,8 @@ function DataEntry(){
                                     
                                     
                                     <p>Previous Reading: </p>
-                                    {/* {tableData2.map((myRow) => (
-                                                
-                                        
-                                       <p key={myRow._id}>
-                                        <input type="text" name="previous" placeholder='Previous reading' value={previousReading} />
-                                       </p>
-                                       
-                                      
-                                    ))} */}
-                                     <input type="text" name="previous" placeholder='Previous reading' value={previousReading} />
+                                    
+                                    <input type="text" name="previous" placeholder='Previous reading' value={previousReading} />
                                     
                                     {errorMessage2 && <p style={{color: 'red'}}>{errorMessage2}</p>}
                                     <p>Current Reading: </p>
@@ -217,6 +199,7 @@ function DataEntry(){
                                     <input type="text" name="amount" placeholder='Amount' value={amount?amount:0}/>
                                     <input type="submit"  onClick={() => setModalShow(true)}/>
                                 </form>
+                                {/* use loading spinner until there is response from the server */}
                                 {loading && !serverResponseReceived && <LoadingSpinner />}
                                 {serverResponseReceived ? (
                                     <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />

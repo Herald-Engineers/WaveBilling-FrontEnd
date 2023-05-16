@@ -18,6 +18,7 @@ function validatePhoneNumber(phoneNumber) {
 }
 
 
+// pop up message generate
 function MyVerticallyCenteredModal1(props) {
 
     return (
@@ -54,7 +55,7 @@ function MyVerticallyCenteredModal(props) {
     const [fullnameError, setFullNameError] = useState("");
    
     const [modalShow2, setModalShow2] = React.useState(false);
-    // Retrieve the token from localStorage
+   
     // const token = localStorage.getItem('token');
     const handleFullName = (event) => {
         const FullNameValue = event.target.value;
@@ -79,7 +80,7 @@ function MyVerticallyCenteredModal(props) {
         const emailValue = event.target.value;
         setEmail(event.target.value);
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        setIsValidEmail(emailRegex.test(emailValue));
+        
         if (!emailRegex.test(emailValue)) {
           setEmailError("Please entera valid email");
         } 

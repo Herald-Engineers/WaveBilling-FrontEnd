@@ -82,7 +82,7 @@ function  Table() {
             </tr>
           </thead>
           <tbody>
-
+            {/* map the data to match the table rows */}
             {
               tableData2.map((row) => (
                 <tr key={row._id}>

@@ -33,8 +33,8 @@ function MyVerticallyCenteredModal(props) {
 }
 
 
-
-  function submitAddReader(fullName, readerId, contactNum, email,editId) {
+// edit the row
+function submitAddReader(fullName, readerId, contactNum, email,editId) {
     
   axios.patch('https://wavebilling-backend-sabinlohani.onrender.com/admin/edit-reader', {
     fullName: fullName,
@@ -161,6 +161,8 @@ function DynamicTable(){
     }).catch(error => console.log(error.response.data));
   };
 
+
+  // function for fetcgin meter readers
   useEffect(() => {
     axios.get("https://wavebilling-backend-sabinlohani.onrender.com/admin/fetch-readers", {
       headers: {
@@ -172,6 +174,8 @@ function DynamicTable(){
   }, []);
 
   const [deleteId, setDeleteId] = useState(null);
+
+  //function for deleting the id
   const handleDelete = (_id) => {
     setLoading(true);
     setServerResponseReceived(false);

@@ -13,6 +13,8 @@ import {RiArrowGoBackFill} from "react-icons/ri";
 import {TbMessageReport} from "react-icons/tb";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+
+//pop-up modal for log out confirmation
 function MyVerticallyCenteredModal(props) {
 
     return (
